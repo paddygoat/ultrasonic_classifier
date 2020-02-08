@@ -93,9 +93,9 @@ sudo chmod -R 775 /home/tegwyn/ultrasonic_classifier/
 cp /home/tegwyn/ultrasonic_classifier/run.desktop /home/tegwyn/Desktop
 
 printf "${GREEN} Now the R packages need to be manually installed: ${NC}\n"
+printf "${GREEN} To install these packages, type 'R' in command line and then, one by one: ${NC}\n"
 
 printf "${GREEN}  install.packages("crayon") ${NC}\n"
-printf "${GREEN}  To install packages, type 'R' in command line and then, one by one: ${NC}\n"
 printf "${GREEN}  install.packages("audio") ${NC}\n"
 printf "${GREEN}  install.packages("randomForest") ${NC}\n"
 printf "${GREEN}  install.packages("bioacoustics") ${NC}\n"
