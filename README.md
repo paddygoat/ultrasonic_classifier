@@ -9,4 +9,5 @@
 cd /home/tegwyn/ultrasonic_classifier/ && chmod 775 ultrasonic_classifier_dependancies_install_nano.sh && bash ultrasonic_classifier_dependancies_install_nano.sh
 
 .... Or install each line one by one for better certainty of success.
-6. Find the file: run.sh in the ultrasonic_classifier directory and edit the password accordingly.
+
+6. Find the file: run.sh in the ultrasonic_classifier directory and edit the password at line 6 accordingly.
