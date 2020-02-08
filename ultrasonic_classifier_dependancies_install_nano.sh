@@ -8,6 +8,7 @@
 # To run this script, type following line into command line:
 # cd /home/tegwyn/ultrasonic_classifier/ && bash ultrasonic_classifier_dependancies_install_nano.sh
 
+sudo -S jetson_clocks
 
 RED='\033[0;31m'
 BLUE='\033[0;34m'
