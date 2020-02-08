@@ -2,7 +2,7 @@
 # cd /home/tegwyn/ultrasonic_classifier/ && bash run.sh
 # sudo chmod u+x run.sh
 
-# Change password for tegwyn's password:
+# Change password for tegwyn's password, here and at line 155:
 echo password | sudo -S jetson_clocks
 # xrandr -o inverted                                                                    # Rotate screen 180 degrees.
 
