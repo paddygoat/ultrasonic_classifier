@@ -4,10 +4,16 @@
 
 # TODO: Use this next line to find out what the kernal is and whether to execute jetson clocks or not:
 kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
-# nano = 4.9.140-tegra aarch64 bits
-# pi = 4.19.75-v7l+ armv7l bits
 
-echo whales | sudo -S jetson_clocks
+nano='4.9.140-tegra aarch64 bits'
+Pi4='4.19.97-v7l+ armv7l bits'
+
+cat > /home/tegwyn/ultrasonic_classifier/helpers/kernel.txt <<<$kernel
+
+if [ "$kernel" -eq "$nano" ]
+    echo whales | sudo -S jetson_clocks
+fi
+
 # xrandr -o inverted                                                                    # Rotate screen 180 degrees.
 
 
@@ -123,7 +129,7 @@ do
     # echo "close_app.txt file does not exist"
     # echo "base name = " $(basename $0)
   fi
-  python3 batteryAndTempMonitoring.py
+  # python3 batteryAndTempMonitoring.py
   if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt" ]; then     # Look for batteryAlert.txt in 'helpers' folder.
     printf  "${RED}The battery is in trouble !!!!!!${NC}\n"
     

@@ -45,6 +45,13 @@ Blink = "\x1b[5m"
 stopFile = "/home/tegwyn/ultrasonic_classifier/helpers/stop.txt"
 startFile = "/home/tegwyn/ultrasonic_classifier/helpers/start.txt"
 
+nano = '4.9.140-tegra aarch64 bits'
+Pi4 = '4.19.97-v7l+ armv7l bits'
+
+text1 = '0'
+
+
+
 def main():
 	'''
 	Main program function
@@ -54,37 +61,57 @@ def main():
 	# clear the console
 	# os.system('clear')
 	
-	file1 = '/sys/class/thermal/thermal_zone1/temp'
-	if (os.path.getsize(file1) > 0):
-		with open(file1, "r") as fp:
-			text1 = fp.read()
-			text1 = text1.strip('\n')
+	# Is the device a Raspberry Pi or a Jetson Nano ???
+	file = "/home/tegwyn/ultrasonic_classifier/helpers/kernel.txt"
+	with open(file) as fp:
+		kernel = fp.read()
 	fp.close()
-	#print(text1,' °C')
+	print(kernel)
+	
+	if (kernel == nano):
+	
+		file1 = '/sys/class/thermal/thermal_zone1/temp'
+		if (os.path.getsize(file1) > 0):
+			with open(file1, "r") as fp:
+				text1 = fp.read()
+				text1 = text1.strip('\n')
+		fp.close()
+		#print(text1,' °C')
 
-	file2 = '/sys/class/thermal/thermal_zone2/temp'
-	if (os.path.getsize(file2) > 0):
-		with open(file2, "r") as fp:
-			text2 = fp.read()
-			text2 = text2.strip('\n')
-	fp.close()
-	#print(text2,' °C')
+		file2 = '/sys/class/thermal/thermal_zone2/temp'
+		if (os.path.getsize(file2) > 0):
+			with open(file2, "r") as fp:
+				text2 = fp.read()
+				text2 = text2.strip('\n')
+		fp.close()
+		#print(text2,' °C')
 
-	file3 = '/sys/class/thermal/thermal_zone3/temp'
-	if (os.path.getsize(file3) > 0):
-		with open(file3, "r") as fp:
-			text3 = fp.read()
-			text3 = text3.strip('\n')
-	fp.close()
-	#print(text3,' °C'	)
 
-	file5 = '/sys/class/thermal/thermal_zone5/temp'
-	if (os.path.getsize(file5) > 0):
-		with open(file5, "r") as fp:
-			text5 = fp.read()
-			text5 = text5.strip('\n')
-	fp.close()
-	#print(text5,' °C')
+		file3 = '/sys/class/thermal/thermal_zone3/temp'
+		if (os.path.getsize(file3) > 0):
+			with open(file3, "r") as fp:
+				text3 = fp.read()
+				text3 = text3.strip('\n')
+		fp.close()
+		#print(text3,' °C'	)
+
+		file5 = '/sys/class/thermal/thermal_zone5/temp'
+		if (os.path.getsize(file5) > 0):
+			with open(file5, "r") as fp:
+				text5 = fp.read()
+				text5 = text5.strip('\n')
+		fp.close()
+		#print(text5,' °C')
+		
+	else:
+		
+		File0 = open('/sys/class/thermal/thermal_zone0/temp')
+		temp = (File0.read())
+		text1 = temp
+		text2 = temp
+		text3 = temp
+		text5 = temp
+		
 
 	# read from adc channels and print to screen
 	batteryPackRead = float(adc.read_voltage(1))*3.9194
@@ -103,6 +130,8 @@ def main():
 	# wait 0.2 seconds before reading the pins again
 	# time.sleep(2)
 
+	
+	
 	message = '\nCPU:   ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '\nBattery:   ' + str(round(batteryPackRead *100)/100) + ' V' + '\nSupply:   ' + str(round(switcherOutRead *100)/100) + ' V' 
 	# print(message)
 	sys.stderr.write(F_LightBlue + message + NC + end)
