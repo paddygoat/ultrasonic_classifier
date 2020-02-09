@@ -307,7 +307,7 @@ class ButtonWindow(Gtk.Window):
                     value = fp.read()
                 fp.close()
             value = int(value)
-            print("From GUI.py .... settings ... one value: .....",value)
+            # print("\nFrom GUI.py .... settings ... one value: .....",value)
             spinLabel_01 = Gtk.Label()
             spinLabel_01.set_text(" Detection threshold:")
             settings_box_1.pack_start(spinLabel_01, True, True, 0)
@@ -319,12 +319,12 @@ class ButtonWindow(Gtk.Window):
             self.spinbutton_01.connect("value-changed", self.spin_selected_1)
             settings_box_1.pack_start(self.spinbutton_01, True, True, 0)
             
-            print("From GUI.py .... settings ... two value: .....",value)
+            # print("\nFrom GUI.py .... settings ... two value: .....",value)
             file = '/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt'
             if os.path.isfile(file):
                 with open(file, "r") as fp:
                     value = fp.read()
-                    print("From GUI.py .... settings ... three value: .....",value)
+                    # print("\nFrom GUI.py .... settings ... three value: .....",value)
                 fp.close()
             value = int(value)
             spinLabel_02 = Gtk.Label()
@@ -551,9 +551,9 @@ class ButtonWindow(Gtk.Window):
 
     # callback function: the signal of the spinbutton is used to change the text of the label
     def spin_selected_1(self, event):
-        print("Tried to update spin file !!!!!")
+        # print("Tried to update spin file !!!!!")
         value = str(self.spinbutton_01.get_value_as_int())
-        print(value)
+        # print(value)
         # self.spinLabel.set_text("Threshold value selected is: " + value + ".")
         file = "/home/tegwyn/ultrasonic_classifier/helpers/threshold.txt"
         f= open(file, "w+")                                 # Create the file threshold.txt
@@ -561,9 +561,9 @@ class ButtonWindow(Gtk.Window):
         f.close()
         
     def spin_selected_2(self, event):
-        print("Tried to update spin file !!!!!")
+        # print("Tried to update spin file !!!!!")
         value = str(self.spinbutton_02.get_value_as_int())
-        print(value)
+        # print(value)
         # self.spinLabel.set_text("Threshold value selected is: " + value + ".")
         file = "/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt"
         f= open(file, "w+")                                 # Create the file threshold.txt
@@ -571,9 +571,9 @@ class ButtonWindow(Gtk.Window):
         f.close()
         
     def spin_selected_7(self, event):
-        print("Tried to update spin file !!!!!")
+        # print("Tried to update spin file !!!!!")
         value = str(self.spinbutton_07.get_value_as_int())
-        print(value)
+        # print(value)
         # self.spinLabel.set_text("Threshold value selected is: " + value + ".")
         file = "/home/tegwyn/ultrasonic_classifier/helpers/chunk_size_record.txt"
         f= open(file, "w+")                                 # Create the file threshold.txt
@@ -581,9 +581,9 @@ class ButtonWindow(Gtk.Window):
         f.close()
         
     def spin_selected_8(self, event):
-        print("Tried to update spin file !!!!!")
+        # print("Tried to update spin file !!!!!")
         value = str(self.spinbutton_08.get_value_as_int())
-        print(value)
+        # print(value)
         # self.spinLabel.set_text("Threshold value selected is: " + value + ".")
         file = "/home/tegwyn/ultrasonic_classifier/helpers/chunk_size_process.txt"
         f= open(file, "w+")                                 # Create the file threshold.txt
@@ -594,7 +594,7 @@ class ButtonWindow(Gtk.Window):
         """
         Update battery and temperature info
         """
-        print("From GUI.py: Update the battery info .... ")
+        # print("\nFrom GUI.py: Update the battery info .... ")
         file = '/home/tegwyn/ultrasonic_classifier/helpers/battery_info.txt'
         if os.path.isfile(file):
             with open(file, "r") as fp:
@@ -844,11 +844,11 @@ class ButtonWindow(Gtk.Window):
                 text = "This needs to be spectogram ......"
                 num=rd.randint(1,60)
                 # print(num)
-                print("From GUI.py: ... Trying to update spectogram: ....... ",num)
+                # print("\nFrom GUI.py: ... Trying to update spectogram: ....... ",num)
                 waittime=6
                 file = '/home/tegwyn/ultrasonic_classifier/images/spectograms/specto.png'
                 if (os.path.getsize(file) > 0):
-                    print("From GUI.py: ... We found a spectogram: ....... ",num)
+                    # print("\nFrom GUI.py: ... We found a spectogram: ....... ",num)
                     self.image = GdkPixbuf.Pixbuf.new_from_file(self.spectoFile)
                     self.image_renderer.set_from_pixbuf (self.image)
                     # print(self.spectoFile)
@@ -859,11 +859,11 @@ class ButtonWindow(Gtk.Window):
             elif (textToggled == "record") and (textToggled2 == "graph"):    # /home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt is where "text" or "spectogram" is stored according to button pressed.
                 num=rd.randint(1,60)
                 # print(num)
-                print("From GUI.py: ... Trying to update barchart: ....... ",num)
+                # print("\nFrom GUI.py: ... Trying to update barchart: ....... ",num)
                 waittime=6
                 file = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
                 if (os.path.getsize(file) > 0):
-                    print("From GUI.py: ... We found a bar chart: ....... ",num)
+                    # print("\nFrom GUI.py: ... We found a bar chart: ....... ",num)
                     self.image = GdkPixbuf.Pixbuf.new_from_file(self.graphFile)
                     self.image_renderer.set_from_pixbuf (self.image)
                 while Gtk.events_pending():
@@ -874,12 +874,12 @@ class ButtonWindow(Gtk.Window):
                 text = "This needs to be spectogram ......"
                 num=rd.randint(1,60)
                 # print(num)
-                print("From GUI.py: ... Trying to update spectogram: ....... ",num)
+                # print("\nFrom GUI.py: ... Trying to update spectogram: ....... ",num)
                 waittime=6
                 file = '/home/tegwyn/ultrasonic_classifier/images/spectograms/specto.png'
                 # if os.path.isfile(file):
                 if (os.path.getsize(file) > 0):
-                    print("From GUI.py: ... We found a spectogram: ....... ",num)
+                    # print("\nFrom GUI.py: ... We found a spectogram: ....... ",num)
                     self.image = GdkPixbuf.Pixbuf.new_from_file(self.spectoFile)
                     self.image_renderer.set_from_pixbuf (self.image)
                     # print(self.spectoFile)
@@ -890,13 +890,13 @@ class ButtonWindow(Gtk.Window):
             elif (textToggled == "process") and (textToggled2 == "graph"):    # /home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt is where "text" or "spectogram" is stored according to button pressed.
                 num=rd.randint(1,60)
                 # print(num)
-                print("From GUI.py .... Updating the Bar chart .....",num)
+                # print("\nFrom GUI.py .... Updating the Bar chart .....",num)
                 waittime=6
                 file = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
                 # Check the file has data in it:
                 if (os.path.getsize(file) > 0):
                 # if os.path.isfile(file):
-                    print("From GUI.py: ... We found a graph file: ....... ",num)
+                    # print("From GUI.py: ... We found a graph file: ....... ",num)
                     self.image = GdkPixbuf.Pixbuf.new_from_file(self.graphFile)
                     self.image_renderer.set_from_pixbuf (self.image)
                 while Gtk.events_pending():
@@ -1029,7 +1029,7 @@ class ButtonWindow(Gtk.Window):
     
 win = ButtonWindow()
 win.set_position(Gtk.WindowPosition.CENTER)
-win.fullscreen()
+#win.fullscreen()
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()

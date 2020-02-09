@@ -119,31 +119,6 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 		#TODO: Why does >0 not work ?????
 		if (num_audio_events >1)
 		{
-			# To look at the predictions 
-			# print("Is the unknown wav a c_pip?")
-			# test_file <- readRDS('rf_c_pip.rds')
-			# print(test_file)
-			# predict(test_file , Event_data_test[,-1], type = "prob")
-
-			# print("Is the unknown wav a c_pip?")
-			# head(predict(test_file , Event_data_test[,-1], type = "prob"))
-
-			#######################################################################################
-			# Let's consolidate the data a bit:
-			# Create a matrix of prediction results for Class_01, (Nattereri = True)
-			# matrix_01 <- predict(rf_nattereri_file , Event_data_test[,-1], type = "prob")
-			# matrix_01
-			# print("Is the unknown wav a nattereri?")
-			# colMeans(matrix_01)
-
-			# matrix_02 <- predict(rf_c_pip_file , Event_data_test[,-1], type = "prob")
-			# matrix_02
-			# print("Is the unknown wav a c_pip?")
-			# colMeans(matrix_02)
-
-			#################################################################################
-			# Let's consolidate all the output data:
-
 			consolidate_results <- function(rf)
 			{
 			  matrix_M <- predict(rf , Event_data_test[,-1], type = "prob")

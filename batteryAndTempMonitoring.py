@@ -103,7 +103,7 @@ def main():
 	# wait 0.2 seconds before reading the pins again
 	# time.sleep(2)
 
-	message = 'CPU:   ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '\nBattery:   ' + str(round(batteryPackRead *100)/100) + ' V' + '\nSupply:   ' + str(round(switcherOutRead *100)/100) + ' V' 
+	message = '\nCPU:   ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '\nBattery:   ' + str(round(batteryPackRead *100)/100) + ' V' + '\nSupply:   ' + str(round(switcherOutRead *100)/100) + ' V' 
 	# print(message)
 	sys.stderr.write(F_LightBlue + message + NC + end)
 
