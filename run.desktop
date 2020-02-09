@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+# Exec=/home/yourname/bin/ssh_home.sh
+Exec=/home/tegwyn/ultrasonic_classifier/run.sh
+Name=Bat Classifier
+GenericName=Bat Classifier
+Comment=Bat Classifier
+Encoding=UTF-8
+Terminal=true
+Type=Application
+Categories=Application
+Icon=/home/tegwyn/ultrasonic_classifier/icons/bat.png
