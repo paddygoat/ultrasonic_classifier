@@ -3,7 +3,11 @@
 # sudo chmod u+x run.sh
 
 # TODO: Use this next line to find out what the kernal is and whether to execute jetson clocks or not:
+# inxi -S command gives:     'System:    Host: raspberrypi Kernel: 4.19.97-v7l+ armv7l bits: 32 Desktop: LXDE 0.10.0 Distro: Raspbian GNU/Linux 10 (buster)'
+
 kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
+# kernel=$(inxi -S | cut -f 3 -d ":") && kernel="${kernel/ /}" && echo $kernel
+
 
 nano='4.9.140-tegra aarch64 bits'
 Pi4='4.19.97-v7l+ armv7l bits'
@@ -130,7 +134,7 @@ do
     # echo "close_app.txt file does not exist"
     # echo "base name = " $(basename $0)
   fi
-  # python3 batteryAndTempMonitoring.py
+  python3 batteryAndTempMonitoring.py
   if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt" ]; then     # Look for batteryAlert.txt in 'helpers' folder.
     printf  "${RED}The battery is in trouble !!!!!!${NC}\n"
     
