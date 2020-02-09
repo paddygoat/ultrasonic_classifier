@@ -8,9 +8,10 @@ kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
 nano='4.9.140-tegra aarch64 bits'
 Pi4='4.19.97-v7l+ armv7l bits'
 
+# Save the kernel info to a file:
 cat > /home/tegwyn/ultrasonic_classifier/helpers/kernel.txt <<<$kernel
 
-if [ "$kernel" -eq "$nano" ]
+if [ "$kernel" = "$nano" ]; then
     echo whales | sudo -S jetson_clocks
 fi
 
