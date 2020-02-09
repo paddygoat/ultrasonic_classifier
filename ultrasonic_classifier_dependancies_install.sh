@@ -42,6 +42,11 @@ make && sudo make install
 
 printf "${GREEN}Alsa installed! ${NC}\n"
 
+
+# Install stuff for AB electronics ADC Pi / nano shield:
+sudo apt-get install python-smbus
+sudo apt-get install i2c-tools
+sudo pip3 install smbus2
 sudo python3 -m pip install git+https://github.com/abelectronicsuk/ABElectronics_Python_Libraries.git
 
 sudo apt-get -y install python3-pip
