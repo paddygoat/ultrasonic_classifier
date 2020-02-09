@@ -41,6 +41,8 @@ make && sudo make install
 
 printf "${GREEN}Alsa installed! ${NC}\n"
 
+sudo python3.5 -m pip install git+https://github.com/abelectronicsuk/ABElectronics_Python_Libraries.git
+
 sudo apt-get -y install python3-pip
 sudo apt-get install liblzma-dev -y
 sudo apt-get install cmake -y
