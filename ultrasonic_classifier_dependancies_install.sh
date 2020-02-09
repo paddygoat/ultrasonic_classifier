@@ -52,6 +52,7 @@ sudo apt-get install build-essential libgtk-3-dev -y
 sudo pip3 install jupyter
 sudo apt install python3-cairo -y
 sudo apt install libcairo2 -y
+sudo apt install inxi -y
 
 pip3 install cython
 pip3 install playsound
