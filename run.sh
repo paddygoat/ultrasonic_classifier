@@ -4,7 +4,7 @@
 
 # TODO: Use this next line to find out what the kernal is and whether to execute jetson clocks or not:
 kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
-
+# nano = 4.9.140-tegra aarch64 bits
 echo whales | sudo -S jetson_clocks
 # xrandr -o inverted                                                                    # Rotate screen 180 degrees.
 
