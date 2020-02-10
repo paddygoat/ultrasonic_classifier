@@ -132,7 +132,7 @@ class ButtonWindow(Gtk.Window):
         buttonZ1.connect("toggled", self.on_button_toggled, "record")
         hbox.pack_start(buttonZ1, False, False, 0)
 
-        buttonZ2 = Gtk.RadioButton.new_with_label_from_widget(buttonZ1, "Process a batch of old recordings")
+        buttonZ2 = Gtk.RadioButton.new_with_label_from_widget(buttonZ1, "Process a batch of old recordings            ")
         #buttonZ2.set_label("process")
         buttonZ2.connect("toggled", self.on_button_toggled, "process")
         hbox.pack_start(buttonZ2, False, False, 0)
@@ -183,14 +183,14 @@ class ButtonWindow(Gtk.Window):
         # self.label.set_text("Choose an audio indicator threshold value!")
         # self.spinbutton_01.connect("value-changed", self.spin_selected)
   
-        check_numeric_01 = Gtk.CheckButton("Numeric")
-        check_numeric_01.connect("toggled", self.on_numeric_toggled)
+        #check_numeric_01 = Gtk.CheckButton("Numeric")
+        #check_numeric_01.connect("toggled", self.on_numeric_toggled)
 
-        check_ifvalid_01 = Gtk.CheckButton("If Valid")
-        check_ifvalid_01.connect("toggled", self.on_ifvalid_toggled)
+        #check_ifvalid_01 = Gtk.CheckButton("If Valid")
+        #check_ifvalid_01.connect("toggled", self.on_ifvalid_toggled)
         
-        checkbutton_01 = Gtk.CheckButton("Click me!")
-        checkbutton_01.connect("toggled", self.on_ifvalid_toggled)
+        #checkbutton_01 = Gtk.CheckButton("Click me!")
+        #checkbutton_01.connect("toggled", self.on_ifvalid_toggled)
         
     
         box2 = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
@@ -223,7 +223,7 @@ class ButtonWindow(Gtk.Window):
         # button4 = Ignore.
         # button5 = Threshold.
         
-        grid_01.attach(box2, 0, 0, 2, 1)
+        # grid_01.attach(box2, 0, 0, 2, 1)
         grid_01.attach(button2, 0, 1, 1, 1)         # Drink another coffee
         grid_01.attach_next_to(button3, button2, Gtk.PositionType.RIGHT, 1, 1)         # Shutdown the pi.
 
@@ -233,14 +233,14 @@ class ButtonWindow(Gtk.Window):
         
         grid_02.add(button7)
         # grid_02.attach(button8, 0, 1, 1, 1)
-        grid_02.attach(check_numeric_01, 0, 3, 1, 1)
+        # grid_02.attach(check_numeric_01, 0, 3, 1, 1)
         # grid_02.attach(check_ifvalid_01, 0, 4, 1, 1)
         # grid_02.attach(checkbutton_01, 0, 5, 1, 1)
 
 ##########################################################################
         hp1.add1(hbox)
         hp1.add2(grid_01)
-        # hp1.set_position(300)   # Only max of 2 panes allowed.
+        # hp1.set_position(600)   # Only max of 2 panes allowed. Sets left or right position.
 ##########################################################################       
         
         button9 = Gtk.Button.new_with_label("Play disc rog audio")
@@ -517,7 +517,7 @@ class ButtonWindow(Gtk.Window):
 #######################################################################################################################
 #######################################################################################################################
         # self.add(vboxCombo)
-        vp3.add(vboxCombo)
+        vp3.add(vboxCombo)                       # species / genus combo boxes.
         vp3.add(hbox2)                           # Spectogram check boxes
         hp3.add1(vp3) 
         hp3.add2(grid_05)                          # Display text file
@@ -528,12 +528,12 @@ class ButtonWindow(Gtk.Window):
         #hp2.set_position(310)   
 ##########################################################################    
         vp1.add1(hp1)                              # Check boxes and buttons
-        vp1.add2(hp3)                              # Some random checkboxes and text box.
-        vp1.set_position(140)
+        vp1.add2(hp3)                              # Species / genus combo boxes and main display box.
+        vp1.set_position(130)                    
 ##########################################################################  
         vp2.add1(vp1)                              # TODO: vp2 may be unnecessary!
         vp2.set_position(370)
-        vp2.add2(hp2)                             # Got logo and recording controls.
+        vp2.add2(hp2)                             # Got logo and recording start stop controls.
 ##########################################################################
         self.add(vp2)
 #######################################################################################################################

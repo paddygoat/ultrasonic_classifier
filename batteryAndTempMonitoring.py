@@ -107,6 +107,7 @@ def main():
 		
 		File0 = open('/sys/class/thermal/thermal_zone0/temp')
 		temp = (File0.read())
+		temp  = temp.strip('\n')
 		text1 = temp
 		text2 = temp
 		text3 = temp
@@ -136,6 +137,8 @@ def main():
 	# print(message)
 	sys.stderr.write(F_LightBlue + message + NC + end)
 
+	# message  = message.strip('\n')
+	message = 'CPU: ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '   Battery: ' + str(round(batteryPackRead *100)/100) + ' V' + '   Supply: ' + str(round(switcherOutRead *100)/100) + ' V' 
 	file6 = '/home/tegwyn/ultrasonic_classifier/helpers/battery_info.txt'
 	f= open(file6, "w+")
 	f.write(message)
