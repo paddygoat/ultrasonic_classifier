@@ -46,7 +46,8 @@ stopFile = "/home/tegwyn/ultrasonic_classifier/helpers/stop.txt"
 startFile = "/home/tegwyn/ultrasonic_classifier/helpers/start.txt"
 
 nano = '4.9.140-tegra aarch64 bits'
-Pi4 = '4.19.97-v7l+ armv7l bits'
+# Pi4 = '4.19.97-v7l+ armv7l bits'
+Pi4 = '4.19.97-v7l+armv7lbitsRaspbianGNU/Linux10(buster)'
 
 text1 = '0'
 
@@ -66,9 +67,13 @@ def main():
 	with open(file) as fp:
 		kernel = fp.read()
 	fp.close()
-	print(kernel)
-	
-	if (kernel == nano):
+	# print(kernel)
+	Pi4 = '4.19.97-v7l+armv7lbitsRaspbianGNU/Linux10(buster)'
+	kernel = kernel.strip('\n')                                                                    # When written to text file, a \n is added !!!!
+	sys.stderr.write(F_LightBlue + "\n" + "kernel: " + kernel+ NC + end)
+	# sys.stderr.write(F_LightBlue + "Pi4: " + Pi4 + NC + end)
+		
+	if (kernel != Pi4):   
 	
 		file1 = '/sys/class/thermal/thermal_zone1/temp'
 		if (os.path.getsize(file1) > 0):
@@ -133,7 +138,7 @@ def main():
 
 	
 	
-	message = '\nCPU:   ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '\nBattery:   ' + str(round(batteryPackRead *100)/100) + ' V' + '\nSupply:   ' + str(round(switcherOutRead *100)/100) + ' V' 
+	message = 'CPU:   ' + str(round((int(text1) + int(text2) + int(text3) + int(text5))  /400) /10) + ' °C' + '\nBattery:   ' + str(round(batteryPackRead *100)/100) + ' V' + '\nSupply:   ' + str(round(switcherOutRead *100)/100) + ' V' 
 	# print(message)
 	sys.stderr.write(F_LightBlue + message + NC + end)
 

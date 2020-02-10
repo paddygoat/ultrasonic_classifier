@@ -5,8 +5,9 @@
 # TODO: Use this next line to find out what the kernal is and whether to execute jetson clocks or not:
 # inxi -S command gives:     'System:    Host: raspberrypi Kernel: 4.19.97-v7l+ armv7l bits: 32 Desktop: LXDE 0.10.0 Distro: Raspbian GNU/Linux 10 (buster)'
 
-kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
-# kernel=$(inxi -S | cut -f 3 -d ":") && kernel="${kernel/ /}" && echo $kernel
+# kernel=$(inxi -S | cut -f 4 -d ":") && kernel="${kernel/ /}" && echo $kernel
+kernel=$(inxi -S | cut -f 3 -d ":") && kernel="${kernel/ /}" && echo $kernel
+kernel=${kernel//[$'\t\r\n ']} && echo $kernel
 
 
 nano='4.9.140-tegra aarch64 bits'
