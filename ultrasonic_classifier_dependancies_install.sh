@@ -42,6 +42,11 @@ make && sudo make install
 
 printf "${GREEN}Alsa installed! ${NC}\n"
 
+# Install stuff for Dragino LoRa GPS hat (RPi only):
+# git clone https://github.com/dragino/dual_chan_pkt_fwd
+# cd /home/tegwyn/dual_chan_pkt_fwd
+# make
+
 
 # Install stuff for AB electronics ADC Pi / nano shield:
 sudo apt-get install python-smbus
