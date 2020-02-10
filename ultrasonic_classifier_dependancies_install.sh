@@ -46,6 +46,9 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 # git clone https://github.com/dragino/dual_chan_pkt_fwd
 # cd /home/tegwyn/dual_chan_pkt_fwd
 # make
+# wget https://codeload.github.com/dragino/rpi-lora-tranceiver/zip/master
+# cd /home/tegwyn
+# tar zxvf master
 
 
 # Install stuff for AB electronics ADC Pi / nano shield:
