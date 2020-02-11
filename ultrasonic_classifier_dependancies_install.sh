@@ -43,12 +43,18 @@ make && sudo make install
 printf "${GREEN}Alsa installed! ${NC}\n"
 
 # Install stuff for Dragino LoRa GPS hat (RPi only):
+# cd /tmp
+# wget https://project-downloads.drogon.net/wiringpi-latest.deb
+# sudo dpkg -i wiringpi-latest.deb
 # git clone https://github.com/dragino/dual_chan_pkt_fwd
 # cd /home/tegwyn/dual_chan_pkt_fwd
 # make
 # wget https://codeload.github.com/dragino/rpi-lora-tranceiver/zip/master
 # cd /home/tegwyn
-# tar zxvf master
+# unzip master
+# cd /home/tegwyn/rpi-lora-tranceiver-master/dragino_lora_app
+# make
+# useage: ./dragino_lora_app
 
 
 # Install stuff for AB electronics ADC Pi / nano shield:
