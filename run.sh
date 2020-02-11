@@ -136,6 +136,7 @@ do
     # echo "base name = " $(basename $0)
   fi
   python3 batteryAndTempMonitoring.py
+  
   if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt" ]; then     # Look for batteryAlert.txt in 'helpers' folder.
     printf  "${RED}The battery is in trouble !!!!!!${NC}\n"
     

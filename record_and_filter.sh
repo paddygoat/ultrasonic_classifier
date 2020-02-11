@@ -27,6 +27,17 @@ f_create_filtered_wav_file ()
   # Now tell the other programs that the filter.wav is ready for classification:
   touch /home/tegwyn/ultrasonic_classifier/helpers/filtered_wav_ready.txt
 }
+f_check_that_R_is_alive ()
+{
+  SERVICE="R"
+  if pgrep -x "$SERVICE" >/dev/null
+  then
+    printf "\n${GREY}${SERVICE} is running ${NC}\n"
+  else
+    printf "\n${GREY}${SERVICE} stopped ${NC}\n"
+    sh ./script_2.sh &                                                # Start the R scrpt again.
+  fi
+}
 
 chunk_time=`cat /home/tegwyn/ultrasonic_classifier/helpers/chunk_size_record.txt` 
 # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
@@ -43,8 +54,9 @@ while [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/start.txt" ]; do
 #################################################
     wait
 #################################################
-	printf "${GREEN}${BLINK}\n record_and_filter.sh reports: iteration ${counter} finished !!!! ${NC}"
+    printf "${GREEN}${BLINK}\n record_and_filter.sh reports: iteration ${counter} finished !!!! ${NC}"
     f_create_filtered_wav_file &
+    f_check_that_R_is_alive &
     chunk_time=`cat /home/tegwyn/ultrasonic_classifier/helpers/chunk_size_record.txt`           # Update record audio chunk size in seconds
     # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
 done

@@ -106,7 +106,7 @@ do
 		# printf "${GREEN}${BLINK}Script_1  reports: Now recording iteration ${iter} audio: ${NC}\n"
 		# printf "${GREEN}Script_1 chunk_time: ${chunk_time} ${NC}\n"
 		sh ./script_2.sh &                                                          # Select an R script.
-		sh ./record_and_filter.sh                                                   # This is a while loop.
+		sh ./record_and_filter.sh                                                   # This is a while loop and blocks progress in this loop here.
 
 		# printf "${GREEN}Iteration ${iter} audio finished ${NC}\n"
 
