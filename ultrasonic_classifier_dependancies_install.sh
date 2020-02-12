@@ -56,6 +56,8 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 # make
 # useage: ./dragino_lora_app
 
+# Script to get SPI working on Jetson Nano: https://github.com/gtjoseph/jetson-nano-support
+
 # sudo pip3 install adafruit-blinka
 # sudo pip3 install --upgrade adafruit_blinka
 # sudo pip3 install RPI.GPIO
