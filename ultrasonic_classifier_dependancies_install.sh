@@ -56,6 +56,12 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 # make
 # useage: ./dragino_lora_app
 
+# sudo pip3 install adafruit-blinka
+# sudo pip3 install --upgrade adafruit_blinka
+# sudo pip3 install RPI.GPIO
+# sudo pip3 install adafruit-circuitpython-si7021      # This is sensor.
+# sudo pip3 install adafruit-circuitpython-tinylora
+
 
 # Install stuff for AB electronics ADC Pi / nano shield:
 sudo apt-get install python-smbus
