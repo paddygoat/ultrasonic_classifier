@@ -39,6 +39,19 @@ f_check_that_R_is_alive ()
   fi
 }
 
+
+
+f_send_data_via_lora ()
+{
+	printf "\n${GREY}${SERVICE} Now send data via LoRa ....... ${NC}\n"
+	cd /home/tegwyn/ultrasonic_classifier/
+	echo whales | sudo -S python3 lora_sender.py
+	printf "\n${GREY}${SERVICE} ...... LoRa data sent !!! ${NC}\n"
+}
+
+
+cd /home/tegwyn/ultrasonic_classifier/
+
 chunk_time=`cat /home/tegwyn/ultrasonic_classifier/helpers/chunk_size_record.txt` 
 # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
 
@@ -59,6 +72,12 @@ while [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/start.txt" ]; do
     f_check_that_R_is_alive &
     chunk_time=`cat /home/tegwyn/ultrasonic_classifier/helpers/chunk_size_record.txt`           # Update record audio chunk size in seconds
     # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
+    printf "${GREY}Counter = ${counter}${NC}\n"
+
+    if [ "$counter" -eq 3 ]; then
+      f_send_data_via_lora &
+      counter=0
+    fi
 done
 
 
