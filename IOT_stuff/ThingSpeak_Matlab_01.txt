@@ -1,10 +1,4 @@
-% Read wind speed and direction from a ThingSpeak channel and visualize 
-% wind velocity using the MATLAB COMPASS plot function. 
-   
-% Channel 12397 contains data from the MathWorks Weather Station, located 
-% in Natick, Massachusetts. The data is collected once every minute. Field 
-% 1 contains wind direction data and field 2 contains wind speed data. 
-   
+
 % Channel ID to read data from 
 readChannelID = 991218; 
 % Wind Direction Field ID 
@@ -17,44 +11,72 @@ AudioEventsFieldID = 4;
 % Key between the '' below:   
 readAPIKey = '482Q3KISO7KBSWBZ'; 
    
-% Fetch wind direction for the last 60 points from the MathWorks weather 
-% station. Learn more about the THINGSPEAKREAD function by going to 
-% the Documentation tab on the right side pane of this page. 
-speciesID= thingSpeakRead(readChannelID,'Fields',SpeciesIDFieldID,'NumPoints',10,...
+% Fetch the last 4 points from the Bat Detector channel:
+speciesID= thingSpeakRead(readChannelID,'Fields',SpeciesIDFieldID,'NumPoints',35,...
 'ReadKey',readAPIKey); 
    
 % Fetch wind speed for the last 60 points from the MathWorks weather station 
 numAudioEvents = thingSpeakRead(readChannelID,'Fields',AudioEventsFieldID,...
-'NumPoints',10,'ReadKey',readAPIKey); 
+'NumPoints',35,'ReadKey',readAPIKey);
 
-numAudioEvents
+% speciesID
+% numAudioEvents
+
+% C = [A B]
+
+A = [speciesID numAudioEvents]
+
+% [~,b] = unique(A(:,1),'stable')
+[~,b] = unique(A(:,1),'last')
+C = A(b,:)
+
+
+% Extract the first column, species label:
+D = C(:,1)
+
+% Extract the second column, audio events:
+E = C(:,2)
 
 % Transpose is firstly required, to use 'unique' properly:
 w = unique(transpose(speciesID),'stable');
-w
+% w
 labels = string(transpose(w));
+labels = string(D)
+
 
 % Transpose is firstly required, to use 'unique' properly:
 y = unique(transpose(numAudioEvents),'stable');
 x = transpose(y)
+x = E
 
-
-% This is where the mapping occurs:
-numbers_to_decode = {'17','26','35','71','92'};
-names = {'C.PIP','HOUSE.KEYS','PLECOTUS','RHINO.HIPPO','S.PIP'};
+% This is where the mapping assignment occurs:
+% May want to remove House keys or try and divide by 10 or something.
+numbers_to_decode = {'0','17','26','32','35','71','92'};
+names = {'','C.PIP','HOUSE.KEYS','NOCTULA','PLECOTUS','RHINO.HIPPO','S.PIP'};
 M = containers.Map(numbers_to_decode,names)
 
 k = keys(M) ;
 val = values(M) ;
 
+% Now get the species name from the numbers using the map:
 for i = 1:length(labels)
-     % [k{i} val{i}]
      z{i}=M(labels{i})
 end
 
+
+
+% Trim the length of the audio events vector to fit that of species:
+len_z = length(z);
+% len_z
+len_x = length(x);
+% len_x
+len_xy = (len_x - len_z);
+% len_xy
+% Trim x vector to match z:
+x = x(len_xy +1 : end);
 
 pie(x,z)
 
 % legend(z)
 % title('Bat Species Audio Events')
-
+% https://thingspeak.com/apps/matlab_visualizations/330834
