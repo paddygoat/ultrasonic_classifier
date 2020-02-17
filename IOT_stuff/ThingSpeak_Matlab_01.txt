@@ -37,16 +37,7 @@ D = C(:,1)
 % Extract the second column, audio events:
 E = C(:,2)
 
-% Transpose is firstly required, to use 'unique' properly:
-w = unique(transpose(speciesID),'stable');
-% w
-labels = string(transpose(w));
 labels = string(D)
-
-
-% Transpose is firstly required, to use 'unique' properly:
-y = unique(transpose(numAudioEvents),'stable');
-x = transpose(y)
 x = E
 
 % This is where the mapping assignment occurs:
@@ -62,8 +53,6 @@ val = values(M) ;
 for i = 1:length(labels)
      z{i}=M(labels{i})
 end
-
-
 
 % Trim the length of the audio events vector to fit that of species:
 len_z = length(z);
