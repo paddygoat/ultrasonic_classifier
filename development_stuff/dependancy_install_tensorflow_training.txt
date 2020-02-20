@@ -1,0 +1,140 @@
+sudo nvpmodel -m 0 && sudo jetson_clocks
+
+# keras 2.2.4
+sudo apt-get update
+sudo apt-get upgrade -y
+
+sudo apt-get install python-pip -y
+sudo apt-get install python3-pip -y
+# pip install --upgrade pip
+# python -m pip uninstall pip
+
+# sudo apt-get install python3-matplotlib -y
+
+sudo apt-get install -y libhdf5-serial-dev hdf5-tools libhdf5-dev zlib1g-dev zip libjpeg8-dev 
+sudo apt-get install python3-pip -y
+sudo pip3 install -U pip testresources setuptools
+sudo pip3 install -U numpy==1.16.1 future==0.17.1 mock==3.0.5 h5py==2.9.0 keras_preprocessing==1.0.5 keras_applications==1.0.8 gast==0.2.2 enum34 futures protobuf
+sudo pip3 install --pre --extra-index-url https://developer.download.nvidia.com/compute/redist/jp/v43 tensorflow-gpu
+
+sudo apt-get install -y libfreetype6-dev
+sudo apt-get install -y pkg-config
+sudo apt-get install -y libpng12-dev
+sudo apt-get install -y pkg-config
+
+python -m pip install -U pip
+python -m pip install -U matplotlib --user
+
+python -m pip uninstall -y pip                              # Downgrade pip
+
+pip install cython
+
+# scikit-image 0.15.0:
+pip install -U scikit-image
+
+sudo apt-get install -y libblas-dev  liblapack-dev
+# pip install --upgrade pip                                  # Upgrade pip
+# pip install theano
+
+sudo apt-get install -y gfortran
+
+# pip install scikit-image
+# pip install --upgrade scikit-image
+
+
+# scikit-learn 0.19.1:
+pip install numpy scipy scikit-learn
+pip install -U scikit-learn
+pip3 install -U scikit-learn
+sudo pip3 install scikit-learn
+
+# sudo pip install keras --user
+# pip3 install --upgrade keras==2.2.0
+pip install --upgrade keras==2.2.0                           # Might need version 2.2.4
+
+# pip3 install --upgrade pip
+sudo pip3 install jupyter
+
+
+tegwyn@tegwyn-Xavier:~$ python -m pip show scikit-learn
+Name: scikit-learn
+Version: 0.20.4
+Summary: A set of python modules for machine learning and data mining
+Home-page: http://scikit-learn.org
+Author: None
+Author-email: None
+License: new BSD
+Location: /home/tegwyn/.local/lib/python2.7/site-packages
+Requires: numpy, scipy
+tegwyn@tegwyn-Xavier:~$ 
+
+sudo apt-get install -y libblas-dev
+sudo apt-get install -y liblapack-dev
+sudo apt-get install gfortran
+
+sudo apt-get install python-scipy
+
+
+pip install cython --user
+
+sudo apt-get install libblas-dev liblapack-dev libatlas-base-dev gfortran
+sudo pip3 install scipy
+
+sudo pip3 uninstall scikit-learn
+sudo pip install scikit-learn
+
+sudo pip3 install --ignore-installed scikit-learn==0.19
+
+  ImportError: Scientific Python (SciPy) is not installed.
+  scikit-learn requires SciPy >= 0.13.3.
+
+sudo pip3 install --ignore-installed SciPy==0.13.3
+sudo pip3 install --ignore-installed scikit-learn==0.19
+# sudo pip3 install --upgrade SciPy
+# sudo pip3 install --upgrade scikit-learn
+
+pip3 install matplotlib --user
+
+
+sudo apt-get install build-essential cmake git unzip pkg-config libopenblas-dev liblapack-dev
+
+sudo apt-get install python-numpy python-scipy python-matplotlib python-yaml
+sudo pip3 install matplotlib
+
+sudo apt-get install libhdf5-serial-dev python-h5py
+
+sudo apt-get install graphviz
+sudo pip3 install pydot-ng
+
+
+sudo apt-get install python-opencv
+
+#install TensorFlow (without GPU support)
+# sudo pip3 install tensorflow
+# pip install tensorflow
+# pip install tensorflow-gpu==1.15
+# pip3 install --upgrade tensorflow-gpu
+
+sudo apt-get install -y protobuf-compiler libprotobuf-dev openssl libssl-dev libcurl4-openssl-dev
+
+wget http://www.cmake.org/files/v3.13/cmake-3.13.0.tar.gz
+
+tar xpvf cmake-3.13.0.tar.gz cmake-3.13.0/
+cd cmake-3.13.0/
+./bootstrap --system-curl 
+make -j8
+echo 'export PATH=/home/nvidia/cmake-3.13.0/bin/:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+
+wget https://github.com/scipy/scipy/releases/download/v1.3.3/scipy-1.3.3.tar.gz
+tar -xzvf scipy-1.3.3.tar.gz scipy-1.3.3
+cd scipy-1.3.3/
+python3 setup.py install --user
+
+
+#install Keras
+sudo pip3 install keras
+
+wget https://github.com/tensorflow/models/archive/master.zip -O models.zip 
+
