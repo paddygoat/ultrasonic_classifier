@@ -15,6 +15,7 @@ touch restart.txt
 # sleep 2
 # killall -9 -w python  This does not work for Jetson Nano !!
 killall -9 -w python3
+killall -9 -w python
 # sh ./run.sh      # What is this for?
 
 exit
