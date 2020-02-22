@@ -134,8 +134,9 @@ for file in os.listdir(directory):                                       # This 
         myaudio = AudioSegment.from_file(file_to_process , "wav") 
         # chunk_length_ms = 5000                           # pydub calculates in millisec ....... 5 seconds
         # chunk_length_ms = 500                            # pydub calculates in millisec ..... 1/2 second
-        # chunk_length_ms = 125                            # pydub calculates in millisec
+        # chunk_length_ms = 125                            # pydub calculates in millisec use this for myotis spectographs.
         chunk_length_ms = 1000                             # pydub calculates in millisec
+
         chunks = make_chunks(myaudio, chunk_length_ms)
 
         #Export all of the individual chunks as wav files

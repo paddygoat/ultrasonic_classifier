@@ -1,15 +1,21 @@
 #!/bin/bash
 # cd /home/tegwyn/ultrasonic_classifier/ && bash restart_the_app.sh
 
+# This script is called from GUI.py.
+
 RED='\e[41m'
 BLUE='\e[44m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 BLINK='\e[5m'
 
-printf "${RED}Trying to kill the GUI: .....${NC}\n"
-killall -9 -w python
-sh ./run.sh
+printf "From restart_the _app.sh: ${RED}Trying to kill the GUI: .....${NC}\n"
+cd /home/tegwyn/ultrasonic_classifier/helpers/
+touch restart.txt
+# sleep 2
+# killall -9 -w python  This does not work for Jetson Nano !!
+killall -9 -w python3
+# sh ./run.sh      # What is this for?
 
 exit
 

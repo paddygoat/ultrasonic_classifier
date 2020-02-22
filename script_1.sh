@@ -83,9 +83,9 @@ do
 		fi
 		if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/restart.txt" ]; then     # Waiting for a 'restart.txt' file to appear in 'helpers' folder.
 		  echo "script_1 reports: restart.txt file exists"
-		  rm /home/tegwyn/ultrasonic_classifier/helpers/restart.txt
 		  sleep 4
-		  exit
+		  # rm /home/tegwyn/ultrasonic_classifier/helpers/restart.txt
+		  # exit
 		fi
     done
   

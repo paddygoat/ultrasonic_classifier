@@ -10,8 +10,8 @@ import re
 from datetime import datetime
 import os.path, time
 from subprocess import call
-import colorama
-from colorama import Fore, Back, Style
+# import colorama
+# from colorama import Fore, Back, Style
 import sys
 
 
@@ -1029,7 +1029,7 @@ class ButtonWindow(Gtk.Window):
     
 win = ButtonWindow()
 win.set_position(Gtk.WindowPosition.CENTER)
-#win.fullscreen()
+# win.fullscreen()
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()

@@ -89,7 +89,7 @@ fi
   
 # The following loop looks for a restart.txt file to exist and then restarts run.sh if it does exist.
 # This is here to enable the GUI to change Gtk boxes etc in the vertical or horixontal panes etc.
-f_main_loop ()
+f_main_loop ()        # This function is not currently used !!!!!
 {
 echo "while loop start"
 while true
@@ -102,7 +102,8 @@ do
     process_name="python"
     # pkill -9 -x $process_name
     # ./$(basename $0) && exit
-    kill $(pgrep -f 'GUI.py')
+    # kill $(pgrep -f 'GUI.py')
+    kill $(pgrep -f 'python3')
     # sleep 4
     # wait
     # python GUI.py &
@@ -141,6 +142,14 @@ do
     # echo "base name = " $(basename $0)
   fi
   python3 batteryAndTempMonitoring.py
+
+  if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/restart.txt" ]; then     # Waiting for a 'restart.txt' file to appear in 'helpers' folder.
+  echo "Run.sh reports: restart.txt file exists"
+  printf "${RED}${BLINK}Run.sh reports: restart.txt file exists${NC}\n"
+  sleep 1
+  python GUI.py &
+  rm /home/tegwyn/ultrasonic_classifier/helpers/restart.txt
+  fi
   
   if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt" ]; then     # Look for batteryAlert.txt in 'helpers' folder.
     printf  "${RED}The battery is in trouble !!!!!!${NC}\n"
@@ -188,6 +197,7 @@ sleep 5
 
 
 # ps -u pi       # Use this to see what shells are running under user = pi.
+# ps -u tegwyn       # Use this to see what shells are running under user = tegwyn.
 # ps -U root -u root -N
 # ps -o pid,ppid,sess,cmd -u pi python
 # ps -o pid,ppid,sess,cmd -U pi | grep 'GUI.py\|PID'

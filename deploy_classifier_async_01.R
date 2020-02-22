@@ -410,6 +410,7 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 				if (text_or_graph_or_spectogram == "spectogram")
 				{
 					system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
+					# system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
 				} else if (text_or_graph_or_spectogram == "graph") {
 					system('python3 /home/tegwyn/ultrasonic_classifier/create_barchart.py')
 				}
