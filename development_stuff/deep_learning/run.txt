@@ -1,0 +1,45 @@
+
+# https://medium.com/@RaghavPrabhu/a-simple-tutorial-to-classify-images-using-tensorflow-step-by-step-guide-7e0fad26c22
+
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/
+
+python3 data_processing.py
+
+# Copy inception into /tmp/imagenet/inception-2015-12-05.tgz (85 Mb) or else it will be downloaded:
+cp /media/tegwyn/Xavier_SD/dog-breed-identification/imagenet /tmp
+
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/
+
+python3 retrain.py --image_dir=build/dataset/ --bottleneck_dir=build/bottleneck/ --how_many_training_steps=5000 --output_graph=build/trained_model/retrained_graph.pb --output_lables=build/trained_model/retrained_labels.txt --summaries_dir=build/summaries
+
+
+To run TensorBoard, run this command:
+User:/dog-breed-identification$ tensorboard — logdir summaries/ — host=0.0.0.0 — port=8888
+TensorBoard 1.7.0 at http://0.0.0.0:8888 (Press CTRL+C to quit)#
+
+
+To run TensorBoard, run this command:
+logdir="/media/tegwyn/Xavier_SD/dog-breed-identification/build/"
+User:/dog-breed-identification$ tensorboard — logdir summaries/ — host=0.0.0.0 — port=8888
+TensorBoard 1.7.0 at http://0.0.0.0:8888 (Press CTRL+C to quit)#
+
+tensorboard --logdir=logs/ --host=127.0.0.1
+
+$ tensorboard --logdir=summaries/ --host=0.0.0.0 --port=8888
+
+open: http://0.0.0.0:8888/
+
+$ tensorboard --logdir=summaries/ --host=127.0.0.1 --port=8888
+
+To use with TensorBoard:
+
+By default, this script will log summaries to /tmp/retrain_logs directory
+
+Visualize the summaries with this command:
+
+tensorboard --logdir /tmp/retrain_logs
+
+from PIL import Image
+im = Image.open("image_path")
+im.convert('RGB').save("image_name.jpg","JPEG") #this converts png image as jpeg
+
