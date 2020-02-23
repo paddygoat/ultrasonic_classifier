@@ -1,0 +1,30 @@
+
+# https://medium.com/@RaghavPrabhu/a-simple-tutorial-to-classify-images-using-tensorflow-step-by-step-guide-7e0fad26c22
+
+# Convert png to jpg:
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/build/dataset/c_pip_spectographs && ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/build/dataset/nattereri_spectographs && ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/build/dataset/plecotus_spectograms && ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/build/dataset/s_pip_spectographs && ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'
+
+ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'
+
+# Copy imagenet folder over to tmp:
+cp /media/tegwyn/Xavier_SD/dog-breed-identification/imagenet /tmp
+
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/
+python3 data_processing.py
+
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/
+python3 retrain.py --image_dir=build/dataset/ --bottleneck_dir=build/bottleneck/ --how_many_training_steps=10000 --output_graph=build/trained_model/retrained_graph.pb --output_lables=build/trained_model/retrained_labels.txt --summaries_dir=build/summaries
+
+
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/build
+tensorboard --logdir=summaries/ --host=0.0.0.0 --port=8888
+
+# To test an image, dump it in /media/tegwyn/Xavier_SD/dog-breed-identification/test, then:
+# Edit this file with appropriate labels:
+gedit /media/tegwyn/Xavier_SD/dog-breed-identification/build/trained_model/retrained_labels.txt
+cd /media/tegwyn/Xavier_SD/dog-breed-identification/
+python3 classify.py
+
