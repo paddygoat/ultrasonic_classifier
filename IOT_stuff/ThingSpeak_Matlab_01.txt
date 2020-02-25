@@ -12,12 +12,12 @@ AudioEventsFieldID = 4;
 readAPIKey = '482Q3KISO7KBSWBZ'; 
    
 % Fetch the last 4 points from the Bat Detector channel:
-speciesID= thingSpeakRead(readChannelID,'Fields',SpeciesIDFieldID,'NumPoints',35,...
+speciesID= thingSpeakRead(readChannelID,'Fields',SpeciesIDFieldID,'NumPoints',20,...
 'ReadKey',readAPIKey); 
    
 % Fetch wind speed for the last 60 points from the MathWorks weather station 
 numAudioEvents = thingSpeakRead(readChannelID,'Fields',AudioEventsFieldID,...
-'NumPoints',35,'ReadKey',readAPIKey);
+'NumPoints',20,'ReadKey',readAPIKey);
 
 % speciesID
 % numAudioEvents
@@ -42,8 +42,8 @@ x = E
 
 % This is where the mapping assignment occurs:
 % May want to remove House keys or try and divide by 10 or something.
-numbers_to_decode = {'0','17','26','32','35','71','92'};
-names = {'','C.PIP','HOUSE.KEYS','NOCTULA','PLECOTUS','RHINO.HIPPO','S.PIP'};
+numbers_to_decode = {'0','17','26','32','35','71','92','97'};
+names = {'','C.PIP','HOUSE.KEYS','NOCTULA','PLECOTUS','RHINO.HIPPO','S.PIP','NATTERERI'};
 M = containers.Map(numbers_to_decode,names)
 
 k = keys(M) ;
