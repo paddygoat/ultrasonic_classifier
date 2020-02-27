@@ -383,6 +383,7 @@ class ButtonWindow(Gtk.Window):
                 with open(file, "r") as fp:
                     value = fp.read()
                 fp.close()
+            value = value.strip('\n')
             value = int(value)
             spinLabel_07 = Gtk.Label()
             spinLabel_07.set_text(" Audio chunk size (recording) secs:")
@@ -400,6 +401,7 @@ class ButtonWindow(Gtk.Window):
                 with open(file, "r") as fp:
                     value = fp.read()
                 fp.close()
+            value = value.strip('\n')
             value = int(value)
             spinLabel_08 = Gtk.Label()
             spinLabel_08.set_text(" Audio chunk size (processing) secs:")
