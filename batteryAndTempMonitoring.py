@@ -160,7 +160,7 @@ def main():
 		print("stop file created !!")
 		f.close()
 
-	if (switcherOutRead > 2) and (switcherOutRead < 5):                                  # Create alert file if output from switching regulator is too low.
+	if (switcherOutRead > 2) and (switcherOutRead < 4.9):                                  # Create alert file if output from switching regulator is too low.
 		file7 = '/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt'
 		f= open(file7, "w+")
 		f.write(message)
