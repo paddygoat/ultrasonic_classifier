@@ -1,3 +1,6 @@
+sudo picocom -b 115200 -r -l -echo -c /dev/ttyUSB2   ....... THIS WORKS !!!!! ... But erase -echo.
+sudo minicom -D /dev/ttyUSB2   ....... THIS WORKS !!!!!
+
 sudo minicom -D /dev/ttyACM0
 
 sudo minicom -D /dev/ttyAMA0
