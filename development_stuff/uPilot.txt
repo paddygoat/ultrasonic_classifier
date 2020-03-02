@@ -1,6 +1,8 @@
 Proceedure:
 
 sudo apt-get install network-manager
+sudo apt-get install network-manager-gnome
+
 Create new WWAN0 connection using mobile broadband wizard and '3internet' setting for APN.
 
 sudo minicom -D /dev/ttyUSB2   ........ Launch serial terminal
@@ -195,7 +197,9 @@ WAIT=3
 //Set up PDP context. Refer to the service provider for APN info
 AT+CGDCONT=1,"IP","everywhere"
 AT+CGDCONT=1,"IPV4V6","three.co.uk"
+AT+CGDCONT=1,"IPV4V6","3internet"
 AT+CGDCONT=1,"IPV4V6","pp.vodafone.co.uk"
+AT+CGDCONT?
 
 //Wait
 WAIT=1
@@ -308,12 +312,3 @@ WAIT=3
 
 //Detach from network
 AT+CGATT=0
-
-
-
-
-
-
-
-
-
