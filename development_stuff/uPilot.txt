@@ -9,7 +9,9 @@ sudo minicom -D /dev/ttyUSB2   ........ Launch serial terminal
 AT+CGPADDR=1                      ..... get ip address
 Open modem connection and type in IP address in first column. 
 Other 2 columns type 255.255.255.0
+check 'connect automattically' under 'general' tab.
 
+It may take 2 or more hard shut downs, disconnect power, to get this working.
 
 +CGPADDR: 1,10.135.0.115     ............ IP address.
 
