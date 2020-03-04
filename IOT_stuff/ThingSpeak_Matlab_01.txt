@@ -42,8 +42,8 @@ x = E
 
 % This is where the mapping assignment occurs:
 % May want to remove House keys or try and divide by 10 or something.
-numbers_to_decode = {'0','17','26','32','35','71','92','97','6','43','86','55'};
-names = {'','C.PIP','HOUSE.KEYS','NOCTULA','PLECOTUS','RHINO.HIPPO','S.PIP','NATTERERI','N_PIP','RHINO.FERRUM','BRANDT','DAUB'};
+numbers_to_decode = {'0','17','26','32','35','71','92','97','6','43','86','55','21'};
+names = {'','C.PIP','HOUSE.KEYS','NOCTULA','PLECOTUS','RHINO.HIPPO','S.PIP','NATTERERI','N.PIP','RHINO.FERRUM','BRANDT','DAUB','BIRD'};
 M = containers.Map(numbers_to_decode,names)
 
 k = keys(M) ;
