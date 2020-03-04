@@ -1,4 +1,4 @@
-# $ cd /home/tegwyn/ultrasonic_classifier/
+# $ cd /home/paddy/Desktop/deploy_classifier/
 # $ Rscript Train_bats.R
 
 # $ Rscript install.packages("audio")
@@ -14,7 +14,7 @@ library(rstudioapi)
 
 # Set up our working directory and data directory:'
 
-setwd("/home/tegwyn/ultrasonic_classifier/")
+setwd("/home/paddy/Desktop/deploy_classifier/")
 wd <- getwd()         # Working directory
 wd
 data_dir <- file.path(wd, "data")
@@ -23,7 +23,7 @@ data_dir
 data_dir_test <- file.path(wd, "unknown_bat_audio")
 data_dir_test
 
-BAT_wav <- read_audio(file.path(wd, "data/nattereri/nattereri_oct_28_2019_03.wav"))
+BAT_wav <- read_audio(file.path(wd, "data/rhino_hippo/rhino_hippo_lesser_horshoe_20190913_200940 LHS.wav"))
 BAT_wav
 
 # Set each argument according to the targeted audio events
@@ -53,9 +53,9 @@ TD <- threshold_detection(
   settings = FALSE, #  Save on a list the above parameters set with this function
   acoustic_feat = TRUE, # Extracts the acoustic and signal quality parameters 
   metadata = FALSE, # Extracts on a list the metadata embedded with the Wave file
-  # spectro_dir = file.path(wd), # "Spectros"), # Directory where to save the spectrograms
-  spectro_dir = NULL,
-  time_scale = 0.05, # Time resolution of 2 ms for spectrogram display
+  spectro_dir = file.path(wd), # "spectrograms"), # Directory where to save the spectrograms
+  #spectro_dir = NULL,
+  time_scale = 0.01, # Time resolution of 2 ms for spectrogram display
   ticks = TRUE # Tick marks and their intervals are drawn on the y-axis (frequencies) 
 ) 
 
@@ -99,7 +99,7 @@ TDs <- TDs[lapply(TDs, function(x) length(x$data)) > 0]
 ###################################################################################################
 bat_train <- function(bat_name)
 {
-  setwd("/home/tegwyn/ultrasonic_classifier/")
+  setwd("/home/paddy/Desktop/deploy_classifier/")
   wd <- getwd()         # Working directory
   wd
   data_dir <- file.path(wd, "data")
@@ -153,6 +153,30 @@ bat_train <- function(bat_name)
 ###################################################################################################
 print("Training has now commenced ...... it may take a few minutes ..... please wait !!!!")
 
+bat_name <- "bird"
+rf_bird <- bat_train(bat_name)
+print("bird:")
+rf_bird $confusion
+saveRDS(rf_bird,"rf_bird.rds")
+
+bat_name <- "brandt"
+rf_brandt <- bat_train(bat_name)
+print("brandt:")
+rf_brandt $confusion
+saveRDS(rf_brandt,"rf_brandt.rds")
+
+bat_name <- "daub"
+rf_daub <- bat_train(bat_name)
+print("daub:")
+rf_daub $confusion
+saveRDS(rf_daub,"rf_daub.rds")
+
+bat_name <- "rhino_ferrum"
+rf_rhino_ferrum <- bat_train(bat_name)
+print("rhino_ferrum:")
+rf_rhino_ferrum $confusion
+saveRDS(rf_rhino_ferrum,"rf_rhino_ferrum.rds")
+
 bat_name <- "house_keys"
 rf_house_keys <- bat_train(bat_name)
 print("house_keys:")
@@ -177,6 +201,12 @@ print("s_pip:")
 rf_s_pip $confusion
 saveRDS(rf_s_pip,"rf_s_pip.rds")
 
+bat_name <- "n_pip"
+rf_n_pip <- bat_train(bat_name)
+print("n_pip:")
+rf_n_pip $confusion
+saveRDS(rf_n_pip,"rf_n_pip.rds")
+
 bat_name <- "nattereri"
 rf_nattereri <- bat_train(bat_name)
 print("nattereri:")
@@ -194,6 +224,7 @@ rf_plecotus <- bat_train(bat_name)
 print("plecotus:")
 rf_plecotus $confusion
 saveRDS(rf_plecotus,"rf_plecotus.rds")
+
 ############################################
 # Predict on one unknown wav file:
 data_dir_test <- file.path(wd, "unknown_bat_audio")
