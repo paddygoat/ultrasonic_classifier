@@ -1,7 +1,115 @@
+
+
+Download QMi drivers for EM7455:
+https://source.sierrawireless.com/resources/airprime/software/usb-drivers-linux-qmi-software-latest/#sthash.vJx7ScWA.dpbs
+
+sudo apt-get install build-essential make gcc
+sudo apt-get install linux-headers-`uname -r`
+E: Unable to locate package linux-headers-4.9.140-tegra
+E: Couldn't find any package by glob 'linux-headers-4.9.140-tegra'
+E: Couldn't find any package by regex 'linux-headers-4.9.140-tegra'
+
+
+
+3.3.5. Building and Installing the Drivers:
+cd /home/tegwyn/Downloads/SierraLinuxQMIdriversS2.39N2.60/GobiSerial; make; sudo make install
+cd /home/tegwyn/Downloads/SierraLinuxQMIdriversS2.39N2.60/GobiNet; make; sudo make install
+
+sudo modprobe GobiSerial [debug=Y]
+sudo modprobe GobiNet [debug=Y]
+
+EM/MC74xx only support RAWIP mode, please build GobiNet with RAWIP=1 switch
+cd /home/tegwyn/Downloads/SierraLinuxQMIdriversS2.39N2.60/GobiNet; make RAWIP=1;
+
+3.3.6. Querying Driver Versions and Supported Devices
+modinfo GobiSerial
+modinfo GobiNet
+3.3.7. Unloading the Drivers
+sudo rmmod GobiSerial
+sudo rmmod GobiNet
+
+echo 1 > /sys/module/GobiSerial/parameters/debug
+echo 1 > /sys/module/GobiNet/parameters/debug
+Disable diagnostic messages:
+echo 0 > /sys/module/GobiSerial/parameters/debug
+echo 0 > /sys/module/GobiNet/parameters/debug
+3.3.9. Verifying Proper Driver Operation
+1. Open terminal and type tail -f /var/log/syslog.
+2. Plug in the Sierra Wireless device.
+3. Check /dev/ for existence of the following devices (check syslog in case the device nodes are
+static i.e. built into the kernel image and not dynamically mounted). Please note that the
+second QMI interface is available only when the device is in multi-pdn mode (/dev/qcqmiy).
+ /dev/ttyUSB0
+ /dev/ttyUSB1
+ /dev/ttyUSB2
+ /dev/qcqmix where x is an integer starting at 0
+ /dev/qcqmiy where y is an integer starting at 0
+
+ls /dev/
+
+
+
+Mar  6 13:17:06 twmffat nautilus-autostart.desktop[19289]: message repeated 399 times: [ Error: Can't initialize nvrm channel]
+Mar  6 13:17:06 twmffat dhcpd[12326]: DHCPDISCOVER from c6:6e:53:aa:8b:ca via l4tbr0: network 192.168.55.0/24: no free leases
+Mar  6 13:17:06 twmffat nautilus-autostart.desktop[19289]: Error: Can't initialize nvrm channel
+Mar  6 13:17:07 twmffat kernel: [ 6515.547932] usb usb2: usb_suspend_both: status -16
+Mar  6 13:17:07 twmffat kernel: [ 6515.568200] usb usb2: usb_suspend_both: status 0
+Mar  6 13:17:07 twmffat kernel: [ 6515.796601] usb 2-1.3: new SuperSpeed USB device number 7 using tegra-xusb
+Mar  6 13:17:07 twmffat kernel: [ 6515.817043] usb 2-1.3: config 1 has an invalid interface number: 12 but max is 4
+Mar  6 13:17:07 twmffat kernel: [ 6515.824547] usb 2-1.3: config 1 has an invalid interface number: 13 but max is 4
+Mar  6 13:17:07 twmffat kernel: [ 6515.834994] usb 2-1.3: config 1 has an invalid interface number: 13 but max is 4
+Mar  6 13:17:07 twmffat kernel: [ 6515.843179] usb 2-1.3: config 1 has no interface number 1
+Mar  6 13:17:07 twmffat kernel: [ 6515.848696] usb 2-1.3: config 1 has no interface number 4
+Mar  6 13:17:07 twmffat kernel: [ 6515.854950] usb 2-1.3: New USB device found, idVendor=1199, idProduct=9071
+Mar  6 13:17:07 twmffat kernel: [ 6515.854956] usb 2-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Mar  6 13:17:07 twmffat kernel: [ 6515.854960] usb 2-1.3: Product: Sierra Wireless EM7455 Qualcomm® Snapdragon™ X7 LTE-A
+Mar  6 13:17:07 twmffat kernel: [ 6515.854964] usb 2-1.3: Manufacturer: Sierra Wireless, Incorporated
+Mar  6 13:17:07 twmffat kernel: [ 6515.854967] usb 2-1.3: SerialNumber: LF93620829021032
+Mar  6 13:17:07 twmffat kernel: [ 6515.859398] GobiSerial 2-1.3:1.0: GobiSerial converter detected
+Mar  6 13:17:07 twmffat kernel: [ 6515.865760] usb 2-1.3: GobiSerial converter now attached to ttyUSB0
+Mar  6 13:17:07 twmffat kernel: [ 6515.867283] GobiSerial 2-1.3:1.2: GobiSerial converter detected
+Mar  6 13:17:07 twmffat kernel: [ 6515.868267] usb 2-1.3: GobiSerial converter now attached to ttyUSB1
+Mar  6 13:17:07 twmffat kernel: [ 6515.870056] GobiSerial 2-1.3:1.3: GobiSerial converter detected
+Mar  6 13:17:07 twmffat kernel: [ 6515.871166] usb 2-1.3: GobiSerial converter now attached to ttyUSB2
+Mar  6 13:17:07 twmffat nautilus-autostart.desktop[19289]: message repeated 90 times: [ Error: Can't initialize nvrm channel]
+Mar  6 13:17:07 twmffat mtp-probe: checking bus 2, device 7: "/sys/devices/70090000.xusb/usb2/2-1/2-1.3"
+Mar  6 13:17:07 twmffat nautilus-autostart.desktop[19289]: Error: Can't initialize nvrm channel
+Mar  6 13:17:07 twmffat mtp-probe: bus: 2, device: 7 was not an MTP device
+Mar  6 13:17:07 twmffat nautilus-autostart.desktop[19289]: Error: Can't initialize nvrm channel
+
+
+sudo apt-get install minicom
+
+sudo gedit /etc/modprobe.d/blacklist-modem.conf
+blacklist qcserial
+blacklist qmi_wwan
+
+sudo apt-get remove modemmanager
+sudo killall -9 modemmanager
+sudo reboot
+
+sudo apt-get install gcc-arm*
+cd /home/tegwyn/SLQS04.00.23.bin/SampleApps/Connection_Manager/
+make CPU=arm9
+
+navigate to pkgs: cd pkgs
+clean then build: make –f pkgs.mak complete
+clean: make –f pkgs.mak clean
+build: make –f pkgs.mak
+
+cd /home/tegwyn/SLQS04.00.23.bin/SampleApps/
+sudo make -f SampleApps.mak complete
+
 Proceedure:
 
 sudo apt-get install network-manager
 sudo apt-get install network-manager-gnome
+sudo apt-get install modemmanager
+
+sudo /usr/sbin/ModemManager --debug
+
+mmcli -L   .............. No modems were found.
+
 
 Create new WWAN0 connection using mobile broadband wizard and '3internet' setting for APN.
 
