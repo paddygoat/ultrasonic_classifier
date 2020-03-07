@@ -1,4 +1,41 @@
+Raspberry Pi 4:
 
+Mar  7 22:07:27 raspberrypi kernel: [  314.127627] usb 1-1.3: new high-speed USB device number 5 using xhci_hcd
+Mar  7 22:07:27 raspberrypi kernel: [  314.258625] usb 1-1.3: config 1 has an invalid interface number: 12 but max is 4
+Mar  7 22:07:27 raspberrypi kernel: [  314.258638] usb 1-1.3: config 1 has an invalid interface number: 13 but max is 4
+Mar  7 22:07:27 raspberrypi kernel: [  314.258649] usb 1-1.3: config 1 has an invalid interface number: 13 but max is 4
+Mar  7 22:07:27 raspberrypi kernel: [  314.258659] usb 1-1.3: config 1 has no interface number 1
+Mar  7 22:07:27 raspberrypi kernel: [  314.258669] usb 1-1.3: config 1 has no interface number 4
+Mar  7 22:07:27 raspberrypi kernel: [  314.259355] usb 1-1.3: New USB device found, idVendor=1199, idProduct=9071, bcdDevice= 0.06
+Mar  7 22:07:27 raspberrypi kernel: [  314.259366] usb 1-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Mar  7 22:07:27 raspberrypi kernel: [  314.259376] usb 1-1.3: Product: Sierra Wireless EM7455 Qualcomm® Snapdragon™ X7 LTE-A
+Mar  7 22:07:27 raspberrypi kernel: [  314.259386] usb 1-1.3: Manufacturer: Sierra Wireless, Incorporated
+Mar  7 22:07:27 raspberrypi kernel: [  314.259395] usb 1-1.3: SerialNumber: LF93620829021032
+Mar  7 22:07:27 raspberrypi mtp-probe: checking bus 1, device 5: "/sys/devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb1/1-1/1-1.3"
+Mar  7 22:07:27 raspberrypi mtp-probe: bus: 1, device: 5 was not an MTP device
+Mar  7 22:07:27 raspberrypi kernel: [  314.361632] usbcore: registered new interface driver usbserial_generic
+Mar  7 22:07:27 raspberrypi kernel: [  314.361682] usbserial: USB Serial support registered for generic
+Mar  7 22:07:27 raspberrypi kernel: [  314.371171] usbcore: registered new interface driver qcserial
+Mar  7 22:07:27 raspberrypi kernel: [  314.371258] usbserial: USB Serial support registered for Qualcomm USB modem
+Mar  7 22:07:27 raspberrypi kernel: [  314.378070] qcserial 1-1.3:1.0: Qualcomm USB modem converter detected
+Mar  7 22:07:27 raspberrypi kernel: [  314.380993] usb 1-1.3: Qualcomm USB modem converter now attached to ttyUSB0
+Mar  7 22:07:27 raspberrypi kernel: [  314.386253] qcserial 1-1.3:1.2: Qualcomm USB modem converter detected
+Mar  7 22:07:27 raspberrypi kernel: [  314.388145] usb 1-1.3: Qualcomm USB modem converter now attached to ttyUSB1
+Mar  7 22:07:27 raspberrypi kernel: [  314.398791] qcserial 1-1.3:1.3: Qualcomm USB modem converter detected
+Mar  7 22:07:27 raspberrypi kernel: [  314.399051] usbcore: registered new interface driver cdc_ncm
+Mar  7 22:07:27 raspberrypi kernel: [  314.399329] usb 1-1.3: Qualcomm USB modem converter now attached to ttyUSB2
+Mar  7 22:07:27 raspberrypi kernel: [  314.404864] usbcore: registered new interface driver cdc_wdm
+Mar  7 22:07:27 raspberrypi kernel: [  314.440397] cdc_mbim 1-1.3:1.12: cdc-wdm0: USB WDM device
+Mar  7 22:07:27 raspberrypi kernel: [  314.441887] cdc_mbim 1-1.3:1.12 wwan0: register 'cdc_mbim' at usb-0000:01:00.0-1.3, CDC MBIM, d2:be:62:d2:77:49
+Mar  7 22:07:27 raspberrypi kernel: [  314.442208] usbcore: registered new interface driver cdc_mbim
+Mar  7 22:07:27 raspberrypi mtp-probe: checking bus 1, device 5: "/sys/devices/platform/scb/fd500000.pcie/pci0000:00/0000:00:00.0/0000:01:00.0/usb1/1-1/1-1.3"
+Mar  7 22:07:27 raspberrypi mtp-probe: bus: 1, device: 5 was not an MTP device
+Mar  7 22:07:27 raspberrypi systemd-udevd[3254]: Using default interface naming scheme 'v240'.
+Mar  7 22:07:27 raspberrypi dhcpcd[467]: wwan0: waiting for carrier
+Mar  7 22:07:27 raspberrypi dhcpcd[467]: wwan0: carrier acquired
+Mar  7 22:07:28 raspberrypi kernel: [  314.588406] 8021q: adding VLAN 0 to HW filter on device wwan0
+Mar  7 22:07:28 raspberrypi dhcpcd[467]: wwan0: IAID 62:d2:77:49
+Mar  7 22:07:28 raspberrypi dhcpcd[467]: wwan0: adding address fe80::ce9e:8d7c:5d66:4604
 
 Download QMi drivers for EM7455:
 https://source.sierrawireless.com/resources/airprime/software/usb-drivers-linux-qmi-software-latest/#sthash.vJx7ScWA.dpbs
@@ -34,7 +71,7 @@ Disable diagnostic messages:
 echo 0 > /sys/module/GobiSerial/parameters/debug
 echo 0 > /sys/module/GobiNet/parameters/debug
 3.3.9. Verifying Proper Driver Operation
-1. Open terminal and type tail -f /var/log/syslog.
+1. Open terminal and type tail -f /var/log/syslog.spberry Pi 4:
 2. Plug in the Sierra Wireless device.
 3. Check /dev/ for existence of the following devices (check syslog in case the device nodes are
 static i.e. built into the kernel image and not dynamically mounted). Please note that the
