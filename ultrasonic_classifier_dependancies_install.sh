@@ -33,7 +33,8 @@ sudo make install
 
 printf "${GREEN}bzip2 installed! ${NC}\n"
 
-sudo apt-get install libncurses5-dev libncursesw5-dev
+sudo apt-get install -y libncurses5-dev libncursesw5-dev
+cd
 wget ftp://ftp.alsa-project.org/pub/utils/alsa-utils-1.1.7.tar.bz2
 tar xvjf alsa-utils-1.1.7.tar.bz2
 cd alsa-utils-1.1.7
@@ -66,12 +67,14 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 
 
 # Install stuff for AB electronics ADC Pi / nano shield:
+cd
+sudo apt-get install -y python3-pip
 sudo apt-get install python-smbus
 sudo apt-get install i2c-tools
 sudo pip3 install smbus2
 sudo python3 -m pip install git+https://github.com/abelectronicsuk/ABElectronics_Python_Libraries.git
 
-sudo apt-get -y install python3-pip
+
 sudo apt-get install liblzma-dev -y
 sudo apt-get install cmake -y
 sudo apt-get install sox libsox-fmt-all -y
@@ -95,6 +98,7 @@ sudo apt-get install python-dev libatlas-base-dev -y
 pip3 install numpy
 pip3 install matplotlib
 pip3 install DateTimeRange
+printf "${GREEN}Pandas takes a long time to install, so be patient !!! ${NC}\n"
 pip3 install pandas
 pip3 install colorama
 
@@ -116,13 +120,14 @@ sudo make install
 
 R --version
 
-printf "${GREEN}R 3.6.1 installed! ${NC}\n"
+printf "${GREEN}R installed! ${NC}\n"
 
 sudo chmod -R 777 /usr/local/lib/R/library
 sudo chmod -R 777 /usr/local/lib/R/
 sudo chmod -R 777 /home/tegwyn/ultrasonic_classifier/run.desktop
 sudo chmod -R 775 /home/tegwyn/ultrasonic_classifier/
 cp /home/tegwyn/ultrasonic_classifier/run.desktop /home/tegwyn/Desktop
+cd
 
 printf "${GREEN} Now the R packages need to be manually installed: ${NC}\n"
 printf "${GREEN} To install these packages, type 'R' in command line and then, one by one: ${NC}\n"
