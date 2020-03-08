@@ -127,6 +127,7 @@ sudo chmod -R 777 /usr/local/lib/R/
 sudo chmod -R 777 /home/tegwyn/ultrasonic_classifier/run.desktop
 sudo chmod -R 775 /home/tegwyn/ultrasonic_classifier/
 cp /home/tegwyn/ultrasonic_classifier/run.desktop /home/tegwyn/Desktop
+chmod -R 777 /home/tegwyn/Desktop/run.desktop
 cd
 
 printf "${GREEN} Now the R packages need to be manually installed: ${NC}\n"
