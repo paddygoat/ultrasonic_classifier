@@ -29,6 +29,7 @@ tegwyn@raspberrypi:~ $
 
 
 Raspberry Pi 4:
+tail -f /var/log/syslog
 
 Mar  7 22:07:27 raspberrypi kernel: [  314.127627] usb 1-1.3: new high-speed USB device number 5 using xhci_hcd
 Mar  7 22:07:27 raspberrypi kernel: [  314.258625] usb 1-1.3: config 1 has an invalid interface number: 12 but max is 4
@@ -101,7 +102,7 @@ Disable diagnostic messages:
 echo 0 > /sys/module/GobiSerial/parameters/debug
 echo 0 > /sys/module/GobiNet/parameters/debug
 3.3.9. Verifying Proper Driver Operation
-1. Open terminal and type tail -f /var/log/syslog.spberry Pi 4:
+1. Open terminal and type tail -f /var/log/syslog
 2. Plug in the Sierra Wireless device.
 3. Check /dev/ for existence of the following devices (check syslog in case the device nodes are
 static i.e. built into the kernel image and not dynamically mounted). Please note that the
