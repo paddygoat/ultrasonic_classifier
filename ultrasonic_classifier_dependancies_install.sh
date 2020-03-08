@@ -59,11 +59,12 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 
 # Script to get SPI working on Jetson Nano: https://github.com/gtjoseph/jetson-nano-support
 
-# sudo pip3 install adafruit-blinka
-# sudo pip3 install --upgrade adafruit_blinka
+cd
+sudo pip3 install adafruit-blinka
+sudo pip3 install --upgrade adafruit_blinka
 # sudo pip3 install RPI.GPIO
-# sudo pip3 install adafruit-circuitpython-si7021      # This is sensor.
-# sudo pip3 install adafruit-circuitpython-tinylora
+sudo pip3 install adafruit-circuitpython-si7021      # This is sensor.
+sudo pip3 install adafruit-circuitpython-tinylora
 
 
 # Install stuff for AB electronics ADC Pi / nano shield:
