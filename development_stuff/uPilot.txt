@@ -1,3 +1,7 @@
+# cd /home/tegwyn/buildKernelAndModules-master/ && bash editConfig.sh
+# cd /home/tegwyn/buildKernelAndModules-master/ && bash makeKernel.sh
+# cd /home/tegwyn/buildKernelAndModules-master/ && bash makeModules.sh
+
 tegwyn@raspberrypi:~ $ lsusb -t
 /:  Bus 02.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/4p, 5000M
 /:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=xhci_hcd/1p, 480M
