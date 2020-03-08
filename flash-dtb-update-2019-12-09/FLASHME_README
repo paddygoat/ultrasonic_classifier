@@ -1,0 +1,8 @@
+This tarball contains the system partitions needed to enable
+/dev/spidev0.0 and /dev/spidev0.1.
+
+To install it, run `sudo ./flashme.sh /dev/mmcblk0`
+Reboot and you should have the spidev0.0 and spidev0.1 devices.
+
+This program doesn't touch any other partitions or files so it's safe to run
+on an existing customized filesystem.
