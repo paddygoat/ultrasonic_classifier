@@ -58,6 +58,8 @@ printf "${GREEN}Alsa installed! ${NC}\n"
 # useage: ./dragino_lora_app
 
 # Script to get SPI working on Jetson Nano: https://github.com/gtjoseph/jetson-nano-support
+cd /home/tegwyn/ultrasonic_classifier/flash-dtb-update-2019-12-09
+sudo ./flashme.sh /dev/mmcblk0
 
 cd
 sudo pip3 install adafruit-blinka
