@@ -68,6 +68,10 @@ sudo pip3 install --upgrade adafruit_blinka
 sudo pip3 install adafruit-circuitpython-si7021      # This is sensor.
 sudo pip3 install adafruit-circuitpython-tinylora
 
+sudo pip3 install adafruit-circuitpython-ssd1306
+sudo pip3 install adafruit-circuitpython-framebuf
+sudo pip3 install adafruit-circuitpython-rfm9x
+
 
 # Install stuff for AB electronics ADC Pi / nano shield:
 cd
