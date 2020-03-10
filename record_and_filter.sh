@@ -45,8 +45,11 @@ f_send_data_via_lora ()
 {
 	printf "\n${GREY}${SERVICE} Now send data via LoRa ....... ${NC}\n"
 	cd /home/tegwyn/ultrasonic_classifier/
-	echo whales | sudo -S python3 lora_sender.py
-	printf "\n${GREY}${SERVICE} ...... LoRa data sent !!! ${NC}\n"
+	# echo whales | sudo -S python3 lora_sender.py
+	cd /home/tegwyn/ultrasonic_classifier/
+	echo whales | sudo -S python3 FTP_upload.py
+
+	printf "\n${GREY}${SERVICE} ...... LoRa or FTP data sent !!! ${NC}\n"
 }
 
 
@@ -74,7 +77,7 @@ while [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/start.txt" ]; do
     # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
     printf "${GREY}Counter = ${counter}${NC}\n"
 
-    if [ "$counter" -eq 3 ]; then
+    if [ "$counter" -eq 2 ]; then
       f_send_data_via_lora &
       counter=0
     fi
