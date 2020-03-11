@@ -42,6 +42,15 @@ rf_noctula_file <- readRDS('rf_noctula.rds')
 rf_plecotus_file <- readRDS('rf_plecotus.rds')
 rf_rhino_hippo_file <- readRDS('rf_rhino_hippo.rds')
 rf_house_keys_file <- readRDS('rf_house_keys.rds')
+
+rf_daub_file <- readRDS('rf_daub.rds')
+rf_n_pip_file <- readRDS('rf_n_pip.rds')
+rf_brandt_file <- readRDS('rf_brandt.rds')
+rf_bird_file <- readRDS('rf_bird.rds')
+rf_barba_file <- readRDS('rf_barba.rds')
+rf_rhino_ferrum_file <- readRDS('rf_rhino_ferrum.rds')
+rf_rodent_file <- readRDS('rf_rodent.rds')
+
 ############################################################################
 
 while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
@@ -147,10 +156,18 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			# "Is the unknown wav a rhino_hippo?"
 			RHINO_HIPPO <- consolidate_results(rf_rhino_hippo_file)
 			# RHINO_HIPPO
+			
+			DAUB <- consolidate_results(rf_daub_file)
+			BIRD <- consolidate_results(rf_bird_file)
+			BRANDT <- consolidate_results(rf_brandt_file)
+			RODENT <- consolidate_results(rf_rodent_file)
+			N_PIP <- consolidate_results(rf_n_pip_file)
+			BARBA <- consolidate_results(rf_barba_file)
+			RHINO_FERRUM <- consolidate_results(rf_rhino_ferrum_file)
 
 			# The matrices are of type "double", object of class "c('matrix', 'double', 'numeric')"
 
-			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, HOUSE_KEYS)
+			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, HOUSE_KEYS, DAUB, BIRD, BRANDT, RODENT, N_PIP, BARBA, RHINO_FERRUM)
 
 			Final_result <- penultimate[order(penultimate[,1], decreasing = FALSE),]
 			# importance(rf_c_pip_file)
