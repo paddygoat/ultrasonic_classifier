@@ -1,5 +1,6 @@
 #!/bin/bash
-# $ cd /home/tegwyn/ultrasonic_classifier/development_stuff/ && bash splitup_and_rename_spectos.sh
+# cd /home/tegwyn/ultrasonic_classifier/development_stuff/deep_learning/ && bash splitup_and_rename_spectos.sh
+# Images to process should be in /home/tegwyn/ultrasonic_classifier/images/test/
 
 RED='\e[41m'
 BLUE='\e[44m'
