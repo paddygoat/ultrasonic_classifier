@@ -3,6 +3,8 @@
 # cd /home/tegwyn/ultrasonic_classifier/ && python3 create_spectogram_batch_process.py
 # cd /home/tegwyn/ultrasonic_classifier/ && chmod 775 create_spectogram_batch_process.py
 
+# deploy_classifier_async_01.R ..... Edit line 430.
+# process_audio_files.py ......... Edit line 138 to '500'
 
 import matplotlib.pyplot as plot
 from scipy.io import wavfile
@@ -51,22 +53,22 @@ if os.path.isfile(file_to_process):
 	samplingFrequency, signalData = wavfile.read(file_to_process)
 	# plot.rcParams['figure.figsize'] = [6.5, 5.5]
 	# plot.rcParams['figure.figsize'] = [80, 20]    # about 16:4 .... 4:1 .... for square 'pixels' ........ 0.5 seconds
-	plot.rcParams['figure.figsize'] = [15, 20]    # 0.125 seconds chunk size
+	plot.rcParams['figure.figsize'] = [24, 10]    # 0.125 seconds chunk size
 	print("one")
 	# plot.rcParams['figure.figsize'] = [10, 35]    # 0.125 seconds chunk size
 	plot.subplot(211)
 	NFFT = 1024
 	# NFFT = 2048
 	# noverlap=2046
-	noverlap=1020
-	dpi = 400
+	noverlap=1018
+	dpi = 300
 	print("two")
 	# plot.specgram(signalData, NFFT=NFFT, Fs=samplingFrequency, noverlap=noverlap, cmap='twilight')
 	plot.specgram(signalData, NFFT=NFFT, Fs=samplingFrequency, noverlap=noverlap)
 	# plot.specgram(signalData,Fs=samplingFrequency)
 	# plot.xlabel('Time, seconds')
 	# plot.ylabel('Frequency')
-	plot.savefig('/home/tegwyn/ultrasonic_classifier/images/spectograms/nattereri_' + str(count) + '.png', bbox_inches='tight', dpi=dpi)          # This will save spectograms with descrete filenames.
+	plot.savefig('/home/tegwyn/ultrasonic_classifier/images/spectograms/noctule_' + str(count) + '.png', bbox_inches='tight', dpi=dpi)          # This will save spectograms with descrete filenames.
 	print("three")
 	count2 = int(count)+1
 	print("count2 = ",count2)
