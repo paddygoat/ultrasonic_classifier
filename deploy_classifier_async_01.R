@@ -136,7 +136,7 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			}
 
 			# "Is the unknown wav house_keys?"
-			HOUSE_KEYS <- consolidate_results(rf_house_keys_file)
+			UFO <- consolidate_results(rf_house_keys_file)
 			# HOUSE_KEYS
 			# "Is the unknown wav a c_pip?"
 			C_PIP <- consolidate_results(rf_c_pip_file)
@@ -167,7 +167,7 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 
 			# The matrices are of type "double", object of class "c('matrix', 'double', 'numeric')"
 
-			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, HOUSE_KEYS, DAUB, BIRD, BRANDT, RODENT, N_PIP, BARBA, RHINO_FERRUM)
+			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, UFO, DAUB, BIRD, BRANDT, RODENT, N_PIP, BARBA, RHINO_FERRUM)
 
 			Final_result <- penultimate[order(penultimate[,1], decreasing = FALSE),]
 			# importance(rf_c_pip_file)
@@ -426,8 +426,8 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 				
 				if (text_or_graph_or_spectogram == "spectogram")
 				{
-					system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
-					# system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
+					# system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
+					system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
 				} else if (text_or_graph_or_spectogram == "graph") {
 					system('python3 /home/tegwyn/ultrasonic_classifier/create_barchart.py')
 				}

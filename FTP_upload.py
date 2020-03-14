@@ -66,16 +66,23 @@ myPath = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/showdata.php'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/send.php'
 
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','##################')
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 file = open(myPath,'rb')                  # file to send
 
 # session.storbinary('STOR bat_detector/send.php', file)     # send the file
 # session.storbinary('STOR bat_detector/showdata.php', file)     # send the file
-session.storbinary('STOR bat_detector/graph.png', file)     # send the file
+session.storbinary('STOR bat_detector/graph.png', file)      # send the file
+file.close()                                                 # close file and FTP
+sys.stderr.write(F_LightBlue+ "..... First file Sent!\n" + '\x1b[0m' + end)
+session.quit()
 
-file.close()                                    # close file and FTP
 
-sys.stderr.write(F_LightBlue+ "..... File Sent!\n" + '\x1b[0m' + end)
+myPath = '/home/tegwyn/ultrasonic_classifier/From_R_01 (copy).csv'
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+file = open(myPath,'rb')                                    # file to send
+session.storbinary('STOR bat_detector/results.csv', file)     # send the file
+file.close()                                                # close file and FTP
+sys.stderr.write(F_LightBlue+ "..... Last file Sent!\n" + '\x1b[0m' + end)
 session.quit()
 
 # http://www.goatindustries.co.uk/bat_detector/graph.png

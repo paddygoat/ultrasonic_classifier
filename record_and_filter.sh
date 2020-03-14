@@ -77,7 +77,7 @@ while [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/start.txt" ]; do
     # printf "${GREY}Update record audio chunk size in seconds = ${chunk_time}${NC}\n"
     printf "${GREY}Counter = ${counter}${NC}\n"
 
-    if [ "$counter" -eq 2 ]; then
+    if [ "$counter" -eq 6 ]; then
       f_send_data_via_lora &
       counter=0
     fi
