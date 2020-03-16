@@ -1,4 +1,5 @@
 #!/bin/bash
+# cd /home/tegwyn/ultrasonic_classifier/ && bash script_3.sh
 # cd /home/tegwyn/ultrasonic_classifier/ && chmod 775 script_3.sh
 
 RED='\e[41m'
@@ -29,6 +30,12 @@ if [ -f "$FILE" ]; then
   exec 6< Final_result.txt
   read line1 <&6
   read line2 <&6
+  read line3 <&6
+  read line4 <&6
+  read line5 <&6
+  read line6 <&6
+  read line7 <&6
+
   printf "${GREEN} $line2 ${NC}\n"
   batName=$(echo "$line2" | sed 's|[.",]||g')                                # remove some " characters
   printf "${GREEN} $batName ${NC}\n"
@@ -54,9 +61,52 @@ if [ -f "$FILE" ]; then
   newName=$(date +%d-%m-%Y_%H:%M:%S)
   cp $FILE /home/tegwyn/ultrasonic_classifier/Final_result_copy.txt
 
-  newName2="${batConfidence3}%_${batName}_${newName}"
+  newName2="${batConfidence3}p_${batName}_${newName}"                # 'p' stands for percent. Cant use percent character as causes problems down the line.
   # printf "${GREEN}New name:  ${newName2} ${NC}\n"
+
+#################################################################################################################
+  printf "\n"
+  printf "${GREEN}First bat: ${NC}\n"
+  batName2=$(echo "$line2" | sed 's|[",]||g')                                     # remove some " characters
+  batName2=$(printf '%s' "$batName2" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName2=$(printf '%s' "$batName2" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName2 ${NC}\n"
+#################################################################################################################
+  printf "${GREEN}Second bat: ${NC}\n"
+  batName3=$(echo "$line3" | sed 's|[",]||g')                                     # remove some " characters
+  batName3=$(printf '%s' "$batName3" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName3=$(printf '%s' "$batName3" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName3 ${NC}\n"
+##################################################################################################################
+  printf "${GREEN}Third bat: ${NC}\n"
+  batName4=$(echo "$line4" | sed 's|[",]||g')                                     # remove some " characters
+  batName4=$(printf '%s' "$batName4" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName4=$(printf '%s' "$batName4" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName4 ${NC}\n"
+##################################################################################################################
+  printf "${GREEN}Fourth bat: ${NC}\n"
+  batName5=$(echo "$line5" | sed 's|[",]||g')                                     # remove some " characters
+  batName5=$(printf '%s' "$batName5" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName5=$(printf '%s' "$batName5" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName5 ${NC}\n"
+##################################################################################################################
+  printf "${GREEN}Fifth bat: ${NC}\n"
+  batName6=$(echo "$line6" | sed 's|[",]||g')                                     # remove some " characters
+  batName6=$(printf '%s' "$batName6" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName6=$(printf '%s' "$batName6" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName6 ${NC}\n"
+##################################################################################################################
+  printf "${GREEN}Sixth bat: ${NC}\n"
+  batName7=$(echo "$line7" | sed 's|[",]||g')                                     # remove some " characters
+  batName7=$(printf '%s' "$batName7" | sed 's/\(\.[0-9][0-9][0-9]\)[0-9]*/\1/g')  # remove all numbers 2 spaces after decimal point.
+  batName7=$(printf '%s' "$batName7" | sed -r 's/[[:space:]]+/<td>/g')            # replace white spaces with html <td>.
+  printf "${GREEN} $batName7 ${NC}\n"
+  printf "\n"
+#################################################################################################################
   mv filtered.wav ${newName2}.wav                                            # Create the new wav file with new informative name.
+  # cp $FILE /home/tegwyn/ultrasonic_classifier/results/${newName2}.txt        # Create the text file with new informative name.
+#################################################################################################################
+
 
   cp ${newName2}.wav /home/tegwyn/ultrasonic_classifier/detected_bat_audio/     # Copy the newly named wav file to detected bat audio folder.
   rm ${newName2}.wav
@@ -102,9 +152,9 @@ if [ $bat_detected -gt 0 ]; then
   cd /home/tegwyn/ultrasonic_classifier/temp/
   ls -t | tail -n +4 | xargs rm                   # Delete all files except for the three newest.
   # printf "${GREEN}Was there an rm missing operand error? deleting from temp ${NC}\n"
-  if  [ $file_count -gt 100 ]; then
+  if  [ $file_count -gt 500 ]; then
     cd /home/tegwyn/ultrasonic_classifier/detected_bat_audio/
-    ls|sort -V -r | tail -n +100 | xargs rm         # Delete all files except for the best 500.
+    ls|sort -V -r | tail -n +500 | xargs rm         # Delete all files except for the best 500.
     # printf "${GREEN}Was there an rm missing operand error? deleting from detected_bats${NC}\n"
     # TODO above error is probably caused by rm not finding the prescribed files ie there are less than 500 files in the detected_bat_audio directory.
   fi
@@ -113,6 +163,41 @@ fi
 cd /home/tegwyn/ultrasonic_classifier/
 # sleep 10
 printf "${MAGENTA} ${BLINK} script_3.sh has finished ${NC}\n"
+
+#################################################################################################################
+
+  exec > /home/tegwyn/ultrasonic_classifier/results/${newName2}.html        # Create the html file with new informative name.
+  printf '<html>'
+  printf '<head>'
+  printf '<link REL="SHORTCUT ICON" HREF="http://www.goatindustries.co.uk/goat.ico">'
+  printf '<title>Intelligent Bat Detector - Audio files saved</title>'
+  printf '</head>'
+  printf '<body>\n'
+  printf '<a href="http://www.goatindustries.co.uk/bat_detector/showdata.php"><button>Back to Main Page</button></a>'
+  printf '<a href="http://www.goatindustries.co.uk/bat_detector/saved_audio_files.html"><button>Back to Saved Audio Page</button></a>'
+  printf '<table width="580" border="1">\n'
+  printf '<tr><td></td><td>NO</td><td>YES</td></tr>'
+  printf '<tr>'
+  printf '<td>'$batName2'\n'
+  printf '</tr>'
+  printf '<td>'$batName3'\n'
+  printf '</tr>'
+  printf '<td>'$batName4'\n'
+  printf '</tr>'
+  printf '<td>'$batName5'\n'
+  printf '</tr>'
+  printf '<td>'$batName6'\n'
+  printf '</tr>'
+  printf '<td>'$batName7'\n'
+  printf '</tr>'
+  printf '</table>\n'
+  printf '</body>\n'
+  printf '</html>'
+
+#################################################################################################################
+
+
+
 # sleep 10
 
 exit

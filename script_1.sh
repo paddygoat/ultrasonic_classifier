@@ -37,6 +37,8 @@ touch stop.txt
 rm shutDown.txt
 # rm /home/tegwyn/ultrasonic_classifier/temp/*
 rm /home/tegwyn/ultrasonic_classifier/unknown_bat_audio/*
+rm /home/tegwyn/ultrasonic_classifier/results/*
+
 chunk_time=60                                     # Audio chunk time in seconds.
 export iterations=200000                          # Number of audio chunks, exported as environmental variable.
 

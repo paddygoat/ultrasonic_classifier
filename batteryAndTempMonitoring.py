@@ -149,7 +149,7 @@ def main():
 	f.write(message)
 	f.close()
 	
-	if (batteryPackRead > 2) and (batteryPackRead < 10):                                 # Create alert file if battery pack is running low.
+	if (batteryPackRead > 2) and (batteryPackRead < 10.5):                                 # Create alert file if battery pack is running low.
 		file7 = '/home/tegwyn/ultrasonic_classifier/helpers/batteryAlert.txt'
 		f= open(file7, "w+")
 		f.write(message)
