@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# pip3 install ftputil
 # cd /home/tegwyn/ultrasonic_classifier/ && echo whales | sudo -S python3 FTP_upload.py
 
 end = "\n"
@@ -12,7 +12,10 @@ B_White = "\x1b[107m"
 NC = "\x1b[0m" # No Color
 Blink = "\x1b[5m"
 
-
+import time
+import ftputil
+import os
+import glob
 import ftplib
 import colorama
 from colorama import Fore, Back, Style
@@ -66,35 +69,85 @@ myPath = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/showdata.php'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/send.php'
 
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
 file = open(myPath,'rb')                  # file to send
 
 # session.storbinary('STOR bat_detector/send.php', file)     # send the file
 # session.storbinary('STOR bat_detector/showdata.php', file)     # send the file
 session.storbinary('STOR bat_detector/graph.png', file)      # send the file
 file.close()                                                 # close file and FTP
-sys.stderr.write(F_LightBlue+ "..... First file Sent!\n" + '\x1b[0m' + end)
+sys.stderr.write(F_LightBlue+ "..... graph.png file Sent!\n" + '\x1b[0m' + end)
 session.quit()
 
 
-myPath = '/home/tegwyn/ultrasonic_classifier/From_R_01 (copy).csv'
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+myPath = '/home/tegwyn/ultrasonic_classifier/From_R_01.csv'
+session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
 file = open(myPath,'rb')                                    # file to send
 session.storbinary('STOR bat_detector/results.csv', file)     # send the file
 file.close()                                                # close file and FTP
-sys.stderr.write(F_LightBlue+ "..... Last file Sent!\n" + '\x1b[0m' + end)
+sys.stderr.write(F_LightBlue+ "..... From_R_01.csv file Sent!\n" + '\x1b[0m' + end)
 session.quit()
+
+myPath = '/home/tegwyn/ultrasonic_classifier/IOT_stuff/html/saved_audio_files.html'
+session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+file = open(myPath,'rb')                                    # file to send
+session.storbinary('STOR bat_detector/saved_audio_files.html', file)     # send the file
+file.close()                                                # close file and FTP
+sys.stderr.write(F_LightBlue+ "..... saved_audio_files.html file Sent!\n" + '\x1b[0m' + end)
+session.quit()
+
+# myPath = '/home/tegwyn/ultrasonic_classifier/results/'
+session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+# dir = 'bat_detector/results'
+# session.mkd(dir)
+# file = open(myPath,'rb')                                    # file to send
+# session.storbinary('STOR bat_detector/results/37%_UFO_15-03-2020_11:54:32.txt', file)     # send the file
+
+for root, dirs, files in os.walk('/home/tegwyn/ultrasonic_classifier/results/'):
+    for fname in files:
+        full_fname = os.path.join(root, fname)
+        session.storbinary('STOR bat_detector/results/' + fname, open(full_fname, 'rb'))
+
+file.close()                                                # close file and FTP
+sys.stderr.write(F_LightBlue+ "..... html results file Sent!\n" + '\x1b[0m' + end)
+session.quit()
+
+
+
+# Delete old files off the FTP server:
+sys.stderr.write(F_LightBlue+ "Opening FTP connection and check for file deletion ...." + '\x1b[0m')
+
+host = ftputil.FTPHost('ftp.goatindustries.co.uk','##########################','##########################')
+mypath = 'bat_detector/results'
+now = time.time()
+host.chdir(mypath)
+names = host.listdir(host.curdir)
+# 86400 seconds = 1 day
+
+for name in names:
+    if host.path.getmtime(name) < (now - (86400)):
+      if host.path.isfile(name):
+         print(name)
+         print(host.path.getmtime(name),',',now,',',now - host.path.getmtime(name) )
+         host.remove(name)
+         sys.stderr.write(F_LightBlue+ "DELETED" + '\x1b[0m')
+    else:
+      sys.stderr.write(F_LightBlue+ "." + '\x1b[0m')
+sys.stderr.write(F_LightBlue+ "Closing FTP connection" + '\x1b[0m')
+host.close()
+
+
 
 # http://www.goatindustries.co.uk/bat_detector/graph.png
 # /home/tegwyn/ultrasonic_classifier/development_stuff/bat_detector.html
 # http://www.goatindustries.co.uk/bat_detector/bat_detector.html
 # http://www.goatindustries.co.uk/bat_detector/showdata.php
 
-# http://www.goatindustries.co.uk/bat_detector/send.php? temp=14.12&humidity=13.75&battery=13.97&wind=3.36
+# ##########################? temp=14.12&humidity=13.75&battery=13.97&wind=3.36
 # import os
-# os.system("xdg-open \"\" http://www.goatindustries.co.uk/bat_detector/send.php? temp=15.12&humidity=13.75&battery=13.97&wind=3.36")
+# os.system("xdg-open \"\" ##########################? temp=15.12&humidity=13.75&battery=13.97&wind=3.36")
 
-sendPath = 'http://www.goatindustries.co.uk/bat_detector/send.php?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&wind=3.36'
+sendPath = '##########################?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&wind=3.36'
 
 
 # open a connection to a URL using urllib
@@ -102,6 +155,11 @@ webUrl  = urllib.request.urlopen(sendPath)
 
 #get the result code and print it
 print ("result code: " + str(webUrl.getcode()))
+
+# Delete all files from results directory:
+files = glob.glob('/home/tegwyn/ultrasonic_classifier/results/*')
+for f in files:
+    os.remove(f)
 
 
 
