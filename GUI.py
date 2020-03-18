@@ -411,7 +411,74 @@ class ButtonWindow(Gtk.Window):
             self.spinbutton_08.set_adjustment(adjustment)
             self.spinbutton_08.connect("value-changed", self.spin_selected_8)
             settings_box_5.pack_start(self.spinbutton_08, True, True, 0)
+            
+            
+            settings_box_6 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+            
+            file = "/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt"
+            if os.path.isfile(file):
+                with open(file, "r") as fp:
+                    value = fp.read()
+                fp.close()    
+            value = value.strip('\n')
+            self.specto_cbtn = Gtk.CheckButton("high res spectographs")
+            if value == "HIGH":
+                self.specto_cbtn.set_active(True)
+            else:
+                self.specto_cbtn.set_active(False)
+            self.specto_cbtn.set_valign(Gtk.Align.START)
+            self.specto_cbtn.connect("clicked", self.on_specto_res_clicked)
+            settings_box_6.pack_start(self.specto_cbtn, True, True, 0)
+            
+#######################################################################################################################
+#######################################################################################################################
 
+            bat_name_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+            button_bat_name = Gtk.Button.new_with_mnemonic("Click me to save bat name! ")
+            button_bat_name.connect("clicked", self.on_bat_name_save_clicked)
+            
+            # bat_name_Label = Gtk.Label()
+            # bat_name_Label.set_text(" Bat name:")
+            # bat_name_Label.connect("clicked", self.on_bat_name_save_clicked)
+            # settings_box_1.pack_start(bat_name_Label, True, True, 0)
+            bat_name_box.pack_start(button_bat_name, True, True, 0)
+
+            toolbar = Gtk.Toolbar()
+            save_btn = Gtk.ToolButton.new_from_stock(Gtk.STOCK_SAVE)
+            save_btn.connect("clicked", self.on_bat_name_save_clicked)
+            toolbar.insert(save_btn, 1)
+            # bat_name_box.pack_start(toolbar, False, True, 0)
+
+            scrolledwindow = Gtk.ScrolledWindow()
+            scrolledwindow.set_hexpand(True)
+            scrolledwindow.set_vexpand(True)
+
+            self.textview = Gtk.TextView()
+            self.textbuffer = self.textview.get_buffer()
+            scrolledwindow.add(self.textview)
+            bat_name_box.pack_start(scrolledwindow, True, True, 0)
+			
+            selected_file = '/home/tegwyn/ultrasonic_classifier/helpers/bat_name.txt'
+            with open(selected_file, 'r') as f:
+                data = f.read()
+                self.textbuffer.set_text(data)
+
+            settings_box_7 = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+            file = "/home/tegwyn/ultrasonic_classifier/helpers/chunk_size_process.txt"
+            if os.path.isfile(file):
+                with open(file, "r") as fp:
+                    value = fp.read()
+                fp.close()
+            value = value.strip('\n')
+            value = int(value)
+            spinLabel_08 = Gtk.Label()
+            spinLabel_08.set_text(" Unused spin label:")
+            settings_box_7.pack_start(spinLabel_08, True, True, 0)
+            adjustment = Gtk.Adjustment(value=value, lower=1, upper=100000, step_incr=1, page_incr=1)
+            self.spinbutton_08 = Gtk.SpinButton()
+            self.spinbutton_08.set_adjustment(adjustment)
+            self.spinbutton_08.connect("value-changed", self.spin_selected_8)
+            settings_box_7.pack_start(self.spinbutton_08, True, True, 0)
 #######################################################################################################################
 #######################################################################################################################
         hbox2 = Gtk.Box(spacing=6)
@@ -516,6 +583,15 @@ class ButtonWindow(Gtk.Window):
             grid_05.attach(settings_box_3, 0, 2, 1, 1)
             grid_05.attach(settings_box_4, 0, 3, 1, 1)
             grid_05.attach(settings_box_5, 0, 4, 1, 1)
+            grid_05.attach(settings_box_6, 0, 5, 1, 1)
+            grid_05.attach(bat_name_box, 0, 6, 1, 1)
+            # grid_05.attach_next_to(settings_box_6, bat_name_box, Gtk.PositionType.RIGHT, 1, 1)        
+            grid_05.attach(settings_box_7, 0, 7, 1, 1)
+
+            # grid_01.attach(button2, 0, 1, 1, 1)         # Drink another coffee
+            # grid_01.attach_next_to(button3, button2, Gtk.PositionType.RIGHT, 1, 1)         # Shutdown the pi.
+
+
 #######################################################################################################################
 #######################################################################################################################
         # self.add(vboxCombo)
@@ -550,6 +626,31 @@ class ButtonWindow(Gtk.Window):
         # while Gtk.events_pending():
             # Gtk.main_iteration()
         # t.sleep(waittime)
+        
+    def on_bat_name_save_clicked(self, widget):
+        save_file = '/home/tegwyn/ultrasonic_classifier/helpers/bat_name.txt'
+        start_iter = self.textbuffer.get_start_iter()
+        end_iter = self.textbuffer.get_end_iter()
+        text = self.textbuffer.get_text(start_iter, end_iter, True)  
+        print("This is the text: ",text)
+        with open(save_file, 'w') as f:
+            f.write(text)
+        
+    def on_specto_res_clicked(self, wid):
+        if wid.get_active():
+            self.set_title("")
+            state = "on"
+            value = "HIGH"
+        else:
+            state = "off"
+            value = "LOW"
+        print("Button was turned", state) 
+        print(value)
+        file = "/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt"
+        f= open(file, "w+")                                 # Create the file specto_resolution.txt
+        f.write(value)
+        f.close()
+
 
     # callback function: the signal of the spinbutton is used to change the text of the label
     def spin_selected_1(self, event):

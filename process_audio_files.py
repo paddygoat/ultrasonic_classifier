@@ -43,8 +43,14 @@ command = 'Rscript'
 command_python = "python3"
 command_bash = "bash"
 
-path_to_create_spectogram = "/home/tegwyn/ultrasonic_classifier/create_spectogram.py"
-# path_to_create_spectogram = "/home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py"       # Use this for experiments with spectograpghs.
+
+file = "/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt"
+f= open(file)
+value = f.readline()
+f.close()
+
+
+
 path_to_create_graph = "/home/tegwyn/ultrasonic_classifier/create_barchart.py"
 path_to_battery = "/home/tegwyn/ultrasonic_classifier/battery_info.sh"                      # Not used anymore.
 
@@ -133,9 +139,9 @@ for file in os.listdir(directory):                                       # This 
 
         myaudio = AudioSegment.from_file(file_to_process , "wav") 
         # chunk_length_ms = 5000                           # pydub calculates in millisec ....... 5 seconds
-        # chunk_length_ms = 500                            # pydub calculates in millisec ..... 1/2 second
+        chunk_length_ms = 500                            # pydub calculates in millisec ..... 1/2 second
         # chunk_length_ms = 125                            # pydub calculates in millisec use this for myotis spectographs.
-        chunk_length_ms = 1000                             # pydub calculates in millisec
+        # chunk_length_ms = 1000                             # pydub calculates in millisec
 
         chunks = make_chunks(myaudio, chunk_length_ms)
 

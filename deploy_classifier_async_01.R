@@ -19,7 +19,7 @@ library(tools)
 library(randomForest)
 library(crayon)
 
-setwd("/home/tegwyn/ultrasonic_classifier/")
+setwd("/home/tegwyn/ultrasonic_classifier")
 wd <- getwd()         # Working directory
 # wd
 cat(magenta$bold(wd))
@@ -35,23 +35,25 @@ cat(magenta$bold('From the R file: Firstly, read into memory all the .rds files 
 cat("\n")
 # Read all the .rds files into RAM or zRAM, once only:
 ############################################################################
-rf_c_pip_file <- readRDS('rf_c_pip.rds')
-rf_s_pip_file <- readRDS('rf_s_pip.rds')
-rf_nattereri_file <- readRDS('rf_nattereri.rds')
-rf_noctula_file <- readRDS('rf_noctula.rds')
-rf_plecotus_file <- readRDS('rf_plecotus.rds')
-rf_rhino_hippo_file <- readRDS('rf_rhino_hippo.rds')
-rf_house_keys_file <- readRDS('rf_house_keys.rds')
+rf_c_pip_file <- readRDS('rds_files/rf_c_pip.rds')
+rf_s_pip_file <- readRDS('rds_files/rf_s_pip.rds')
+rf_nattereri_file <- readRDS('rds_files/rf_nattereri.rds')
+rf_noctula_file <- readRDS('rds_files/rf_noctula.rds')
+rf_plecotus_file <- readRDS('rds_files/rf_plecotus.rds')
+rf_rhino_hippo_file <- readRDS('rds_files/rf_rhino_hippo.rds')
+rf_house_keys_file <- readRDS('rds_files/rf_house_keys.rds')
 
-rf_daub_file <- readRDS('rf_daub.rds')
-rf_n_pip_file <- readRDS('rf_n_pip.rds')
-rf_brandt_file <- readRDS('rf_brandt.rds')
-rf_bird_file <- readRDS('rf_bird.rds')
-rf_barba_file <- readRDS('rf_barba.rds')
-rf_rhino_ferrum_file <- readRDS('rf_rhino_ferrum.rds')
-rf_rodent_file <- readRDS('rf_rodent.rds')
-
+rf_daub_file <- readRDS('rds_files/rf_daub.rds')
+rf_n_pip_file <- readRDS('rds_files/rf_n_pip.rds')
+rf_brandt_file <- readRDS('rds_files/rf_brandt.rds')
+rf_bird_file <- readRDS('rds_files/rf_bird.rds')
+rf_barba_file <- readRDS('rds_files/rf_barba.rds')
+rf_rhino_ferrum_file <- readRDS('rds_files/rf_rhino_ferrum.rds')
+rf_rodent_file <- readRDS('rds_files/rf_rodent.rds')
+rf_serotine_file <- readRDS('rds_files/rf_serotine.rds')
 ############################################################################
+
+cat(magenta$bold('From the R file: .rds files now loaded!\n'))
 
 while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 {
@@ -164,10 +166,11 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			N_PIP <- consolidate_results(rf_n_pip_file)
 			BARBA <- consolidate_results(rf_barba_file)
 			RHINO_FERRUM <- consolidate_results(rf_rhino_ferrum_file)
+			SEROTINE <- consolidate_results(rf_serotine_file)
 
 			# The matrices are of type "double", object of class "c('matrix', 'double', 'numeric')"
 
-			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, UFO, DAUB, BIRD, BRANDT, RODENT, N_PIP, BARBA, RHINO_FERRUM)
+			penultimate <- rbind(C_PIP, S_PIP, NATTERERI, NOCTULA, PLECOTUS, RHINO_HIPPO, UFO, DAUB, BIRD, BRANDT, RODENT, N_PIP, BARBA, RHINO_FERRUM, SEROTINE)
 
 			Final_result <- penultimate[order(penultimate[,1], decreasing = FALSE),]
 			# importance(rf_c_pip_file)
@@ -420,14 +423,25 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			{
 				value <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt")
 				text_or_graph_or_spectogram <- value[c(1),c(1)]
+				value2 <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt")
+				high_or_low_res_spectogram <- value2[c(1),c(1)]
 				# print("Imported time_limit:")
 				cat(magenta$bold('From the R file: text_or_graph_or_spectogram:\n'))
 				print(text_or_graph_or_spectogram)
+				cat(magenta$bold('From the R file: high_or_low_res_spectogram:\n'))
+				print(high_or_low_res_spectogram)
 				
 				if (text_or_graph_or_spectogram == "spectogram")
 				{
-					# system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
-					system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
+					if (high_or_low_res_spectogram == "LOW")
+					{
+						cat(magenta$bold('From the R file: LOW resolution was selected !!!:\n'))
+						system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
+					
+					} else {
+						system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
+						cat(magenta$bold('From the R file: HIGH resolution was selected !!!:\n'))
+					}
 				} else if (text_or_graph_or_spectogram == "graph") {
 					system('python3 /home/tegwyn/ultrasonic_classifier/create_barchart.py')
 				}

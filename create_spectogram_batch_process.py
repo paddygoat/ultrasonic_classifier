@@ -29,6 +29,7 @@ folder2 = "/home/tegwyn/ultrasonic_classifier/processed_audio/"
 folder3 = "/home/tegwyn/ultrasonic_classifier/unknown_bat_audio/"
 folder4 = "/home/tegwyn/ultrasonic_classifier/my_audio"
 file3 = '/home/tegwyn/ultrasonic_classifier/helpers/count.txt'
+file4 = '/home/tegwyn/ultrasonic_classifier/helpers/bat_name.txt'
 
 # file_to_process = "/home/tegwyn/ultrasonic_classifier/unknown_bat_audio/filtered.wav"
 
@@ -39,6 +40,10 @@ if os.path.isfile(file3):
 else:
     count = '0'
 
+if os.path.isfile(file4):
+	with open(file4) as fp:
+		bat_name = fp.readline()
+		print("bat_name = ",bat_name)
 
 directory = os.fsencode("/home/tegwyn/ultrasonic_classifier/unknown_bat_audio/")
 for file in os.listdir(directory):                                       # This loop will carry on going as long as there are more files to process.
@@ -49,7 +54,7 @@ for file in os.listdir(directory):                                       # This 
         print(file_to_process)
 
 if os.path.isfile(file_to_process):
-	print("From create_spectogram .... We found a wav file filtered.wav ....... ")
+	print("From create_spectogram_batchprocess .... We found a wav file filtered.wav ....... ")
 	samplingFrequency, signalData = wavfile.read(file_to_process)
 	# plot.rcParams['figure.figsize'] = [6.5, 5.5]
 	# plot.rcParams['figure.figsize'] = [80, 20]    # about 16:4 .... 4:1 .... for square 'pixels' ........ 0.5 seconds
@@ -68,7 +73,7 @@ if os.path.isfile(file_to_process):
 	# plot.specgram(signalData,Fs=samplingFrequency)
 	# plot.xlabel('Time, seconds')
 	# plot.ylabel('Frequency')
-	plot.savefig('/home/tegwyn/ultrasonic_classifier/images/spectograms/noctule_' + str(count) + '.png', bbox_inches='tight', dpi=dpi)          # This will save spectograms with descrete filenames.
+	plot.savefig('/home/tegwyn/ultrasonic_classifier/images/spectograms/'+ bat_name + str(count) + '.png', bbox_inches='tight', dpi=dpi)          # This will save spectograms with descrete filenames.
 	print("three")
 	count2 = int(count)+1
 	print("count2 = ",count2)
