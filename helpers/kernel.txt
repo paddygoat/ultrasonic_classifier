@@ -1,1 +1,1 @@
-4.19.97-v7l+ armv7l bits
+[0;37mtwmffat[1;34mKernel[0;37mUbuntu18.04.4LTS[0;37m[0m

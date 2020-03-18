@@ -1,4 +1,1 @@
-
-CPU:   34.1 °C
-Battery:   0.0 V
-Supply:   0.0 V
+CPU: 17.4 °C   Battery: 0.0 V   Supply: 0.0 V
