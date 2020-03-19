@@ -149,6 +149,11 @@ class ButtonWindow(Gtk.Window):
         self.label3.set_width_chars(6)
         self.label3.set_text("Battery")
         hbox.pack_start(self.label3, False, False, 0)
+        
+        self.label4 = Gtk.Label()
+        self.label4.set_width_chars(6)
+        self.label4.set_text("Status")
+        hbox.pack_start(self.label4, False, False, 0)
 ############################################################################################
         button1 = Gtk.Button.new_with_label("Settings")
         button1.connect("clicked", self.on_settings_clicked)
@@ -695,7 +700,7 @@ class ButtonWindow(Gtk.Window):
         
     def on_timeout(self, user_data):
         """
-        Update battery and temperature info
+        Update status, battery and temperature info
         """
         # print("\nFrom GUI.py: Update the battery info .... ")
         file = '/home/tegwyn/ultrasonic_classifier/helpers/battery_info.txt'
@@ -704,6 +709,14 @@ class ButtonWindow(Gtk.Window):
                 battery = fp.read()
             fp.close()
         self.label3.set_text(battery)
+        
+        # print("\nFrom GUI.py: Update the status info .... ")
+        file = '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
+        if os.path.isfile(file):
+            with open(file, "r") as fp:
+                status = fp.read()
+            fp.close()
+        self.label4.set_text(status)
         # As this is a timeout function, return True so that it
         # continues to get called
         return True

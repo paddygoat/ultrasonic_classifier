@@ -44,6 +44,7 @@ f_check_that_R_is_alive ()
 f_send_data_via_lora ()
 {
 	printf "\n${GREY}${SERVICE} Now send data via LoRa or FTP....... ${NC}\n"
+	echo "Now send data via LoRa or FTP ..." > '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
 	cd /home/tegwyn/ultrasonic_classifier/IOT_stuff/html/ && bash list_to_html.sh
 	cd /home/tegwyn/ultrasonic_classifier/
 	# echo whales | sudo -S python3 lora_sender.py

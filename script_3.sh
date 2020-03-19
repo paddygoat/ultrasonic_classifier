@@ -54,6 +54,7 @@ if [ -f "$FILE" ]; then
   printf "${GREEN}Bat confidence3 value is: $batConfidence3 ${NC}\n"
 
   printf "${GREEN}Bat detected was a $batName ${NC}\n"
+  echo $batName > '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
   exec 6<&-
 
   cd /home/tegwyn/ultrasonic_classifier/temp/

@@ -32,6 +32,11 @@ unlink("/home/tegwyn/ultrasonic_classifier/helpers/classification_finished.txt")
 
 # print("From the R file: Read into memory all the .rds files ..... ")
 cat(magenta$bold('From the R file: Firstly, read into memory all the .rds files ..... \n'))
+# write.table("Loading models into memory ...", file = "/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+writeLines(c("Loading models into memory ..."), fileConn)
+close(fileConn)
+
 cat("\n")
 # Read all the .rds files into RAM or zRAM, once only:
 ############################################################################
@@ -54,6 +59,9 @@ rf_serotine_file <- readRDS('rds_files/rf_serotine.rds')
 ############################################################################
 
 cat(magenta$bold('From the R file: .rds files now loaded!\n'))
+fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+writeLines(c("Start classification ..."), fileConn)
+close(fileConn)
 
 while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 {
@@ -72,6 +80,9 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 	{
 		# print("From the R file: filtered.wav exists!")
 		cat(magenta$bold('From the R file: filtered.wav exists!\n'))
+		fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+		writeLines(c("Found audio to classify ..."), fileConn)
+		close(fileConn)
 		# print("From the R file: Delete Final_result.txt:")
 
 		# delete some files:
@@ -130,6 +141,10 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 		#TODO: Why does >0 not work ?????
 		if (num_audio_events >1)
 		{
+			fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+			writeLines(c("Audio events found !!"), fileConn)
+			close(fileConn)
+
 			consolidate_results <- function(rf)
 			{
 			  matrix_M <- predict(rf , Event_data_test[,-1], type = "prob")
@@ -451,6 +466,9 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 		# print("Although a filtered.wav file was found, it did not have any audio events in it !!!!")
 		# cat(magenta$bold('From the R file: Although a filtered.wav file was found, it did not have any audio events in it !!!!\n'))
 		write.table("", file = "/home/tegwyn/ultrasonic_classifier/helpers/classification_finished.txt")
+		fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+		writeLines(c("No audio events detected !!"), fileConn)
+		close(fileConn)
 		Sys.sleep(0.5)
 		}
 	} else {                                        # if (file.exists("/home/tegwyn/ultrasonic_classifier/unknown_bat_audio/filtered.wav"))

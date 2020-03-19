@@ -76,6 +76,7 @@ do
     while [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/stop.txt" ]; do          # This loop will block the classifier and recorder whilst waiting for a 'stop.txt' file to appear in 'helpers' folder.
 		printf "script_1 reports: ${RED}stop.txt${NC} file exists\n"
 		sleep 2
+		echo "Status: STOPPED" > '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
 		if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/shutDown.txt" ]; then     # Waiting for a 'shutDown.txt' file to appear in 'helpers' folder.
 		  echo "script_1 reports: shutDown.txt file exists"
 		  sleep 10
@@ -100,7 +101,7 @@ do
 
 	if [ "$value" == "record" ]; then
 		# echo "script_1 reports: Recording! ....."
-
+		echo "Started recording ..." > '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
 		# counter=`cat /home/tegwyn/ultrasonic_classifier/helpers/counter.txt`
 		# export iter=$counter
 		cd /home/tegwyn/ultrasonic_classifier/
@@ -120,6 +121,7 @@ do
 	elif [ "$value" == "process" ]; then
 		# echo "script_1 reports: Processing! ...."
 		printf "${GREEN}script_1 reports: Processing! .... ${NC}\n"
+		echo "Started processing ..." > '/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt'
 		sleep 2
 		cd /home/tegwyn/ultrasonic_classifier/
 
