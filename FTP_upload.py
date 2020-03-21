@@ -12,6 +12,7 @@ B_White = "\x1b[107m"
 NC = "\x1b[0m" # No Color
 Blink = "\x1b[5m"
 
+import subprocess
 import time
 import ftputil
 import os
@@ -41,6 +42,11 @@ except ImportError:
 			
 adc = ADCPi(0x68, 0x69, 12)
 
+# Define command and arguments
+command = 'Rscript'
+command_python = "python3"
+command_bash = "bash"
+
 # read from adc channels and print to screen
 batteryPackRead = float(adc.read_voltage(1))*3.9194
 switcherOutRead = float(adc.read_voltage(2))*1.1937
@@ -69,7 +75,7 @@ myPath = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/showdata.php'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/send.php'
 
-session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 file = open(myPath,'rb')                  # file to send
 
 # session.storbinary('STOR bat_detector/send.php', file)     # send the file
@@ -81,7 +87,7 @@ session.quit()
 
 
 myPath = '/home/tegwyn/ultrasonic_classifier/From_R_01.csv'
-session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 file = open(myPath,'rb')                                    # file to send
 session.storbinary('STOR bat_detector/results.csv', file)     # send the file
 file.close()                                                # close file and FTP
@@ -89,7 +95,7 @@ sys.stderr.write(F_LightBlue+ "..... From_R_01.csv file Sent!\n" + '\x1b[0m' + e
 session.quit()
 
 myPath = '/home/tegwyn/ultrasonic_classifier/IOT_stuff/html/saved_audio_files.html'
-session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 file = open(myPath,'rb')                                    # file to send
 session.storbinary('STOR bat_detector/saved_audio_files.html', file)     # send the file
 file.close()                                                # close file and FTP
@@ -97,7 +103,7 @@ sys.stderr.write(F_LightBlue+ "..... saved_audio_files.html file Sent!\n" + '\x1
 session.quit()
 
 # myPath = '/home/tegwyn/ultrasonic_classifier/results/'
-session = ftplib.FTP('ftp.goatindustries.co.uk','##########################','##########################')
+session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 # dir = 'bat_detector/results'
 # session.mkd(dir)
 # file = open(myPath,'rb')                                    # file to send
@@ -117,7 +123,7 @@ session.quit()
 # Delete old files off the FTP server:
 sys.stderr.write(F_LightBlue+ "Opening FTP connection and check for file deletion ...." + '\x1b[0m')
 
-host = ftputil.FTPHost('ftp.goatindustries.co.uk','##########################','##########################')
+host = ftputil.FTPHost('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
 mypath = 'bat_detector/results'
 now = time.time()
 host.chdir(mypath)
@@ -143,11 +149,11 @@ host.close()
 # http://www.goatindustries.co.uk/bat_detector/bat_detector.html
 # http://www.goatindustries.co.uk/bat_detector/showdata.php
 
-# ##########################? temp=14.12&humidity=13.75&battery=13.97&wind=3.36
+# http://www.goatindustries.co.uk/bat_detector/send.php? temp=14.12&humidity=13.75&battery=13.97&wind=3.36
 # import os
-# os.system("xdg-open \"\" ##########################? temp=15.12&humidity=13.75&battery=13.97&wind=3.36")
+# os.system("xdg-open \"\" http://www.goatindustries.co.uk/bat_detector/send.php? temp=15.12&humidity=13.75&battery=13.97&wind=3.36")
 
-sendPath = '##########################?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&wind=3.36'
+sendPath = 'http://www.goatindustries.co.uk/bat_detector/send.php?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&wind=3.36'
 
 
 # open a connection to a URL using urllib
@@ -162,10 +168,9 @@ for f in files:
     os.remove(f)
 
 
-
-
-
-
-
+# Build subprocess command for running modem.sh:
+path2script = '/home/tegwyn/ultrasonic_classifier/modem.sh'
+cmd = [command_bash, path2script]
+x = subprocess.Popen(cmd)                                       # This is where the modem program is called.
 
 
