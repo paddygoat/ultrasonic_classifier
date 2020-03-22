@@ -75,7 +75,7 @@ myPath = '/home/tegwyn/ultrasonic_classifier/images/graphical_results/graph.png'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/showdata.php'
 # myPath = '/home/tegwyn/ultrasonic_classifier/development_stuff/weather_station_files/send.php'
 
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+session = ftplib.FTP('########################','########################','########################')
 file = open(myPath,'rb')                  # file to send
 
 # session.storbinary('STOR bat_detector/send.php', file)     # send the file
@@ -87,7 +87,7 @@ session.quit()
 
 
 myPath = '/home/tegwyn/ultrasonic_classifier/From_R_01.csv'
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+session = ftplib.FTP('########################','########################','########################')
 file = open(myPath,'rb')                                    # file to send
 session.storbinary('STOR bat_detector/results.csv', file)     # send the file
 file.close()                                                # close file and FTP
@@ -95,7 +95,7 @@ sys.stderr.write(F_LightBlue+ "..... From_R_01.csv file Sent!\n" + '\x1b[0m' + e
 session.quit()
 
 myPath = '/home/tegwyn/ultrasonic_classifier/IOT_stuff/html/saved_audio_files.html'
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+session = ftplib.FTP('########################','########################','########################')
 file = open(myPath,'rb')                                    # file to send
 session.storbinary('STOR bat_detector/saved_audio_files.html', file)     # send the file
 file.close()                                                # close file and FTP
@@ -103,7 +103,7 @@ sys.stderr.write(F_LightBlue+ "..... saved_audio_files.html file Sent!\n" + '\x1
 session.quit()
 
 # myPath = '/home/tegwyn/ultrasonic_classifier/results/'
-session = ftplib.FTP('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+session = ftplib.FTP('########################','########################','########################')
 # dir = 'bat_detector/results'
 # session.mkd(dir)
 # file = open(myPath,'rb')                                    # file to send
@@ -123,7 +123,7 @@ session.quit()
 # Delete old files off the FTP server:
 sys.stderr.write(F_LightBlue+ "Opening FTP connection and check for file deletion ...." + '\x1b[0m')
 
-host = ftputil.FTPHost('ftp.goatindustries.co.uk','paddygoat2@goatindustries.co.uk','Whales1966!')
+host = ftputil.FTPHost('########################','########################','########################')
 mypath = 'bat_detector/results'
 now = time.time()
 host.chdir(mypath)
@@ -153,7 +153,16 @@ host.close()
 # import os
 # os.system("xdg-open \"\" http://www.goatindustries.co.uk/bat_detector/send.php? temp=15.12&humidity=13.75&battery=13.97&wind=3.36")
 
-sendPath = 'http://www.goatindustries.co.uk/bat_detector/send.php?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&wind=3.36'
+
+file3 = '/home/tegwyn/ultrasonic_classifier/helpers/CPU_temp.txt'
+if (os.path.getsize(file3) > 0):
+    with open(file3, "r") as fp:
+        CPU_temp = fp.read()
+        CPU_temp = CPU_temp.strip('\n')
+fp.close()
+print("CPU temp:",CPU_temp)
+
+sendPath = '########################?temp='+str(temp_val)+'&humidity='+str(humid_val)+'&battery='+str(batteryPackRead)+'&CPU_temp='+str(CPU_temp)
 
 
 # open a connection to a URL using urllib
@@ -174,3 +183,4 @@ cmd = [command_bash, path2script]
 x = subprocess.Popen(cmd)                                       # This is where the modem program is called.
 
 
+exit()
