@@ -7,27 +7,51 @@
 
 <?php
 
+// Get wind data:
+$host="localhost"; // Host name 
+$username="#################"; // Mysql username 
+$password="#################"; // Mysql password 
+$db_name="#################"; // Database name 
+$tbl_name="#################"; // Table name
+
+// Connect to server and select database.
+mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
+mysql_select_db("$db_name")or die("cannot select DB");
+
+// Retrieve data from database 
+$sql3="SELECT * FROM weather2017  ORDER BY id DESC LIMIT 1";
+$result3=mysql_query($sql3);
+while($row13=mysql_fetch_array($result3))
+{
+    $windSpeed = $row13['windgust'];
+}
+
+echo $windSpeed;
+// close MySQL connection 
+mysql_close();
+
 // Create connection
 $host="localhost"; // Host name 
-$username="paddygoat_bat"; // Mysql username 
-$password="##############"; // Mysql password 
-$db_name="paddygoat_bat_01"; // Database name 
-$tbl_name="bat_01"; // Table name
+$username="#################"; // Mysql username 
+$password="#################"; // Mysql password 
+$db_name="#################"; // Database name 
+$tbl_name="#################"; // Table name
 
 // Connect to server and select database.
 $dbhandle = mysql_connect($hostname, $username, $password) 
 or die("Unable to connect to MySQL");
 
-$selected = mysql_select_db("paddygoat_bat_01",$dbhandle) 
+$selected = mysql_select_db("#################1",$dbhandle) 
 or die("Could not select database");
 
 ////////////////////////////////////////////////////////////////////////////////
 // Send the new info to the table:
-$result = mysql_query("INSERT INTO $tbl_name(temp,humidity,battery,wind) VALUES (
+$result = mysql_query("INSERT INTO $tbl_name(temp,humidity,battery,CPU_temp,wind) VALUES (
 '" . $_GET[temp] . "',
 '" . $_GET[humidity] . "',
 '" . $_GET[battery] . "',
-'" . $_GET[wind] . "')",
+'" . $_GET[CPU_temp] . "',
+'" . $windSpeed . "')",
 $dbhandle);
 
 //echo "<html>";
