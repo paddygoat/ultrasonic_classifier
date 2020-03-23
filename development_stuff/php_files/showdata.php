@@ -22,17 +22,17 @@
 <?php
 
 $host="localhost"; // Host name 
-$username="#################"; // Mysql username 
-$password="#################"; // Mysql password 
-$db_name="#################"; // Database name 
-$tbl_name="#################"; // Table name
+$username="#############"; // Mysql username 
+$password="#############"; // Mysql password 
+$db_name="#############"; // Database name 
+$tbl_name="#############"; // Table name
 
 // Connect to server and select database.
 mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
 mysql_select_db("$db_name")or die("cannot select DB");
 
 
-$query12="SELECT * FROM bat_01 ORDER BY id DESC LIMIT 1";
+$query12="SELECT * FROM ############# ORDER BY id DESC LIMIT 1";
 $result12=mysql_query($query12);
 while($row12=mysql_fetch_array($result12))
    {  
@@ -45,26 +45,30 @@ while($row12=mysql_fetch_array($result12))
    $CPU_temp = $row12['CPU_temp'];
    }
    
-//echo $timestamp;
+// Time stuff:
+$localTime = time();
+//echo(date("M-d h:i:s",$localTime));
+$timestamp2 = strtotime($timeStamp);
+$timeDifference = $localTime - $timestamp2;
+// echo $timeDifference;
 
 // Retrieve data from database 
- 
-$sql2="SELECT * FROM bat_01  ORDER BY id DESC LIMIT 10";
+$sql2="SELECT * FROM #############  ORDER BY id DESC LIMIT 10";
 $result2=mysql_query($sql2);
 
 // Get wind data:
 $host="localhost"; // Host name 
-$username="#################"; // Mysql username 
-$password="#################"; // Mysql password 
-$db_name="#################"; // Database name 
-$tbl_name="#################"; // Table name
+$username="#############"; // Mysql username 
+$password="#############"; // Mysql password 
+$db_name="#############"; // Database name 
+$tbl_name="#############"; // Table name
 
 // Connect to server and select database.
 mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
 mysql_select_db("$db_name")or die("cannot select DB");
 
 // Retrieve data from database 
-$sql3="SELECT * FROM weather2017  ORDER BY id DESC LIMIT 1";
+$sql3="SELECT * FROM #############  ORDER BY id DESC LIMIT 1";
 $result3=mysql_query($sql3);
 while($row13=mysql_fetch_array($result3))
 {
@@ -91,6 +95,20 @@ while($row13=mysql_fetch_array($result3))
 -->
 </style>
 
+<style type="text/css">
+.blink_me {
+  color: green;
+  font-weight: bold;
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
+
 <body>
 	
 <table width="580">
@@ -112,19 +130,30 @@ while($row13=mysql_fetch_array($result3))
 
 <table width="580">
   <tr><span class="style2">
-    <td><span class="style2"><?php echo $timeStamp; ?></td>
+    <td><span class="style2">Last update: <?php echo(date("M-d H:i:s",$timestamp2)); ?></td>
+    <td><span class="style2">Local time: <?php echo(date("M-d H:i:s",$localTime)); ?></td>
+	<?php
+	$t = date("H");
+
+	if ($timeDifference < "600")
+	{
+		?> <td><div align="center"><div class="blink_me">NOW LIVE !</div></td> <?php
+	} else {
+		?> <td><div align="right">NOT LIVE</td><td>..... Please check later.</td> <?php
+	}
+	?>
+    
   </tr>
   <tr>
 	<td><span class="style2">Battery: <?php echo $battery; ?> Volts</td>
     <td><span class="style2">Temp: <?php echo $temp; ?> ℃</td>
     <td><span class="style2">Humidity: <?php echo $humidity; ?> %</td>
-    <td><span class="style2">Wind: <?php echo $windSpeed; ?> knots</td>
+    <td><div align="right"<span class="style2">Wind: <?php echo $windSpeed; ?> knots</td>
   </tr>
 </table>
-<br>
+
 
 <table width="580" border="1" cellspacing="0" cellpadding="0">
-	<caption><span class="style2">Raw Data</caption>
 	<tr>
 		<td width="6%"><span class="style1"><div align="center">Id </div></td>
 		<td width="12%"><span class="style1"><div align="center">Time Stamp </div></td>
