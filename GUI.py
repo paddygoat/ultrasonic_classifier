@@ -409,7 +409,7 @@ class ButtonWindow(Gtk.Window):
             value = value.strip('\n')
             value = int(value)
             spinLabel_08 = Gtk.Label()
-            spinLabel_08.set_text(" Audio chunk size (processing) secs:")
+            spinLabel_08.set_text(" Audio chunk size (processing) msecs:")
             settings_box_5.pack_start(spinLabel_08, True, True, 0)
             adjustment = Gtk.Adjustment(value=value, lower=1, upper=100000, step_incr=1, page_incr=1)
             self.spinbutton_08 = Gtk.SpinButton()

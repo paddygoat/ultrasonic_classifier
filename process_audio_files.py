@@ -30,6 +30,7 @@ file2 = "/home/tegwyn/ultrasonic_classifier/Final_result.txt"
 file3 = "/home/tegwyn/ultrasonic_classifier/Final_result_copy.txt"
 file4='/home/tegwyn/ultrasonic_classifier/helpers/combo_01.txt'
 file5 = "/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt"                    # text or spectigram or graph.
+file6 = '/home/tegwyn/ultrasonic_classifier/helpers/chunk_size_process.txt'            # chunk size process.
 folder1 = "/home/tegwyn/ultrasonic_classifier/"
 folder2 = "/home/tegwyn/ultrasonic_classifier/processed_audio/"
 folder3 = "/home/tegwyn/ultrasonic_classifier/unknown_bat_audio/"
@@ -49,6 +50,10 @@ f= open(file)
 value = f.readline()
 f.close()
 
+f= open(file6)
+chunk_size_process = f.readline()
+chunk_size_process = chunk_size_process.strip('\n')
+f.close()
 
 
 path_to_create_graph = "/home/tegwyn/ultrasonic_classifier/create_barchart.py"
@@ -77,6 +82,9 @@ while True:
     if not x:
         break
 f.close()
+
+
+
 
 if (line[1] == "UK_Bats\n"):
 	print ("UK_Bats was selected")
@@ -141,7 +149,8 @@ for file in os.listdir(directory):                                       # This 
         # chunk_length_ms = 5000                           # pydub calculates in millisec ....... 5 seconds
         chunk_length_ms = 500                            # pydub calculates in millisec ..... 1/2 second
         # chunk_length_ms = 125                            # pydub calculates in millisec use this for myotis spectographs.
-        # chunk_length_ms = 1000                             # pydub calculates in millisec
+        chunk_length_ms = 1000                             # pydub calculates in millisec
+        chunk_length_ms = int(chunk_size_process)
 
         chunks = make_chunks(myaudio, chunk_length_ms)
 
