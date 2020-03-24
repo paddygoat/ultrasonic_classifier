@@ -1,1 +1,1 @@
-No audio events detected !!
+Status: STOPPED
