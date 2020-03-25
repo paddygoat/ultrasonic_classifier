@@ -13,8 +13,8 @@ kernel=${kernel//[$'\t\r\n ']} && echo $kernel
 # sudo chmod -R 775 /home/tegwyn/ultrasonic_classifier/
 
 # nano='4.9.140-tegra aarch64 bits'
-# nano='tegwynKernelUbuntu18.04.4LTS'
-nano='[0;37mtegwyn[1;34mKernel[0;37mUbuntu18.04.4LTS[0;37m[0m'
+# nano='twmffatKernelUbuntu18.04.4LTS'
+nano='[0;37mtwmffat[1;34mKernel[0;37mUbuntu18.04.4LTS[0;37m[0m'
 
 Pi4='4.19.97-v7l+ armv7l bits'
 
@@ -25,6 +25,7 @@ if [ "$kernel" = "$nano" ]; then
     echo whales | sudo -S jetson_clocks
 fi
 
+echo whales | sudo -S jetson_clocks
 # xrandr -o inverted                                                                    # Rotate screen 180 degrees.
 
 

@@ -15,6 +15,10 @@ YELLOW='\e[93m'
 NC='\033[0m' # No Color
 BLINK='\e[5m'
 
+
+# command 2>&1 | tee ~/home/tegwyn/ultrasonic_classifier/log.txt
+exec > >(tee -i /home/tegwyn/ultrasonic_classifier/log.txt)
+
 amixer sset PCM 100%
 
 # **** List of PLAYBACK Hardware Devices ****
@@ -26,6 +30,9 @@ aplay --device=hw:0,3 /home/tegwyn/ultrasonic_classifier/alert_sounds/Go_for_Dep
 
 cd /home/tegwyn/ultrasonic_classifier/
 
+rm /home/tegwyn/ultrasonic_classifier/temp/final.wav
+rm /home/tegwyn/ultrasonic_classifier/unknown_bat_audio/filtered.wav
+rm /home/tegwyn/ultrasonic_classifier/unknown_bat_audio/filtered.wav
 rm /home/tegwyn/ultrasonic_classifier/From_R_01.csv
 rm Final_result.txt
 rm Final_result_copy.txt
@@ -45,8 +52,8 @@ export iterations=200000                          # Number of audio chunks, expo
 #TODO Allow a variable for overall time to be used and then claculate iterations from it.
 # 5 hours with 15 second chunks -> 5 x 60 x 4 -> iterations = 1200.
 
-cd /home/tegwyn/ultrasonic_classifier/temp/
-rm final.wav
+
+
 
 printf "Iterations: $iterations\n"
 

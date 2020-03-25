@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 
 # cd /home/tegwyn/ultrasonic_classifier/ && python3 create_barchart.py
 # python3 create_barchart.py
@@ -134,7 +133,7 @@ bat_names[0,1] = bat_names[0,1].strip('""')
 # print("bat name no. 1: ",bat_names[0,1],"\n")
 
 #####################################################################
-new_bat_names = [None]*11                               # Create a 1D array of 10 new bat names.
+new_bat_names = [None]*15                               # Create a 1D array of 15 new bat names.
 
 for x in range(col_count):
     bat_names[0,x] = bat_names[0,x].strip('""')
@@ -147,7 +146,7 @@ for x in range(col_count):
 # print("\n")
 
 # Initially set remainder of bat name labels to "":
-for x in range(col_count,11):
+for x in range(col_count,15):
     new_bat_names[x] = ""
     # print("new names: ",new_bat_names[x])
 # print("\n")
@@ -228,10 +227,10 @@ data = data.transpose()
 
 
 
-if (row_count >10):
-    b = np.zeros((12, (row_count -1)))                                # row, columns .... Increase columns rather than rows since the data has been transposed.
+if (row_count >14):
+    b = np.zeros((16, (row_count -1)))                                # row, columns .... Increase columns rather than rows since the data has been transposed.
 else:
-    b = np.zeros((12, (10)))
+    b = np.zeros((16, (10)))
 
 
 # columns, rows
@@ -326,18 +325,27 @@ p8=ax.bar(ind,data[8],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[
 p9=ax.bar(ind,data[9],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]  ,color='brown')
 p10=ax.bar(ind,data[10],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]  ,color='orange')
 
+p11=ax.bar(ind,data[11],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]+data[10]  ,color='teal')
+p12=ax.bar(ind,data[12],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]+data[10]+data[11]   ,color='silver')
+p13=ax.bar(ind,data[13],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]+data[10]+data[11]+data[12]   ,color='olive')
+p14=ax.bar(ind,data[14],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]+data[10]+data[11]+data[12]+data[13]   ,color='pink')
+p15=ax.bar(ind,data[15],width,bottom=data[0]+data[1]+data[2]+data[3]+data[4]+data[5]+data[6]+data[7]+data[8]+data[9]+data[10]+data[11]+data[12]+data[13]+data[14]  ,color='slategray')
+
+
+
+
 # fig.title('My title')
 ax.set_title('Number of Bat Calls in Time Period')
 
 
-ax.set_ylabel('frequency (per hour)')
+ax.set_ylabel('frequency of occurrence')
 # ax.set_xlabel('hour of the day')
 
 ax.set_xticks (ind + width/2.)
 ax.set_xticklabels( xt, rotation = 45 )                       # This is where the x axis labels are set.
 
-fig.legend( (p0[0], p1[0], p2[0], p3[0] , p4[0], p5[0], p6[0], p7[0], p8[0], p9[0]  ), 
-           (new_bat_names[1], new_bat_names[2], new_bat_names[3], new_bat_names[4], new_bat_names[5], new_bat_names[6] , new_bat_names[7] , new_bat_names[8] , new_bat_names[9] , new_bat_names[10] ) )
+fig.legend( (p0[0], p1[0], p2[0], p3[0] , p4[0], p5[0], p6[0], p7[0], p8[0], p9[0], p10[0], p11[0], p12[0], p13[0]  ), 
+           (new_bat_names[1], new_bat_names[2], new_bat_names[3], new_bat_names[4], new_bat_names[5], new_bat_names[6], new_bat_names[7] ,new_bat_names[8] ,new_bat_names[9] ,new_bat_names[10] ,new_bat_names[11] ,new_bat_names[12] ,new_bat_names[13] ,new_bat_names[14] ) )
 
 fig.legend(loc=(1.11, 0.4))
 

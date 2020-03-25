@@ -203,7 +203,12 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			# Then we can get variables such as batName:
 			# print("This is the bat name from the new data:")
 			currBatName <- df99[c(1),c(1)]
-			currBatName
+			cat(magenta$bold('From the R file: currBatName: ',currBatName,'\n'))
+			
+			confidence <- df99[c(1),c(3)]
+			confidence <- confidence * 100
+			cat(magenta$bold('From the R file: confidence: ',confidence,'\n'))
+			
 			currBatNameChar <- sapply(currBatName, as.character)                       # Convert to a character vector.
 
 			t = as.integer( as.POSIXct( Sys.time()))
@@ -215,258 +220,260 @@ while (file.exists("/home/tegwyn/ultrasonic_classifier/helpers/start.txt"))
 			time_limit = 601
 
 			##################################################################################################################################
-
-			if(file.exists("/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt"))
+			if(confidence > 10)
 			{
-				value <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt")
-				time_limit <- value[c(1),c(1)]
-				# print("Imported time_limit:")
-				cat(magenta$bold('From the R file: Imported time_limit:\n'))
-				print(time_limit)
-			}
 
-			##################################################################################################################################
-
-			if(file.exists("From_R_01.csv"))
-			{
-				prevData <- read.csv("From_R_01.csv")
-				# Read the previous time cell:
-				newValue <- prevData[c(1),c(1)]
-				tMillisPrevious = newValue
-				
-				# Calculate time interval:
-				timeInterval = tMillisCurrent - tMillisPrevious
-				# print("Time interval: ")
-				cat(magenta$bold('From the R file: Time interval:\n'))
-				print(timeInterval)
-
-			###########################################################################################################################
-				# 1.This is for the case where there is a species name AND we're within the time limit:
-				if((currBatNameChar %in% colnames(prevData)) & (timeInterval < time_limit))
+				if(file.exists("/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt"))
 				{
-					# print("Yep, it's in there!")
-					# Lets add the new data bat frequency integer ,num_audio_events, to the old:
-					prevValue <- prevData["1", currBatNameChar]
-					newValue = prevValue + num_audio_events
-					
-					# print("This is the number of rows in the dataframe:")
-					# print(nrow(prevData))
-
-					prevData["1", currBatNameChar] <- newValue                                  # This is where a new value is inserted into a cell.
-
-			##########################################################################################################################
-				# 2.This is for the case where there is no species name AND we've passed the time limit:
-				} else if (( timeInterval > time_limit) & !(currBatNameChar %in% colnames(prevData))) {
-
-					# print("The bat name was not there!")
-					
-					# Firstly, duplicate row 1, which is the latest row, dataFrame[1,]:
-					prevData <- rbind(prevData[1,], prevData)
-					# print("Did this dupicate the rows ... YES !!!!")
-					# print(prevData)
-
-					# Now set all the values of row 1 to zero:
-					value = 0                                                         # (num_audio_events = 0)
-					prevData["1",] <- value                                # All rows in species column
-					# print("What does the new dataframe look like? .... TWO ")
-					# print(prevData)
-
-					# Now to create our new data column:
-					df9 <- data.frame(placeholder_name = 1)
-					names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
-					# print("This below should now have column names:")
-					# df9
-
-					# Now try and replace the placeholder with num_audio_events:
-					# But, initially, set all the new num_audio_events cells to something temporary:
-					# ferrets = 99
-					# df9["1", currBatNameChar] <- ferrets
-					# print("What does the ferrets dataframe look like?")
-					# print(df9)
-
-					# Now insert a new value for num_audio_events into row 1, the new column:
-					df9["1", currBatNameChar] <- num_audio_events
-					# print("Now we have our new dataframe with some useful data:")
-					# df9
-					# print(df9)
-					
-					# Now add the new column:
-					prevData <- cbind(prevData, df9) 
-					
-					# Now set all the values of column bat name to zero:
-					value = "0"                                                         # (num_audio_events = 0)
-					prevData[,currBatNameChar] <- value                                # All rows in species column
-					# print("What does the new dataframe look like? .... TWO ")
-					# print(prevData)
-					
-					# Then set the first row to correct num_audio_events value:
-					value = num_audio_events
-					prevData["1", currBatNameChar] <- value                             # Latest row only
-					# print("What does the new dataframe look like? ...... THREE")
-					# print(prevData)
-
-					# The time cell gets set to zero, so put the time value back into that cell:
-					value = tMillisCurrent 
-					prevData["1", "BLANK"] <- value                             # Latest row only, time column = BLANK
-					# print("What does the new dataframe look like? ...... FOUR")
-					# print(prevData)
-					
-			##############################################################################################################
-				# 3.This is for the case where there is a species name AND we're outside the time limit:
-				} else if ((currBatNameChar %in% colnames(prevData)) & ( timeInterval > time_limit))  {
-
-					# Firstly, duplicate row 1, which is the latest row, dataFrame[1,]:
-					prevData <- rbind(prevData[1,], prevData)
-					# print("Did this dupicate the rows ... YES !!!!")
-					# print(prevData)
-
-					# Now insert the new value of time into the new dataframe row:
-					value = t
-					prevData["1", "BLANK"] <- value
-
-					
-					# Now set all the values of row 1 to zero:
-					value = 0                                                         # (num_audio_events = 0)
-					prevData["1",] <- value                                # All rows in species column
-					# print("What does the new dataframe look like? .... TWO ")
-					# print(prevData)
-					
-					
-					# Then set the first row to correct num_audio_events value:
-					value = num_audio_events
-					prevData["1", currBatNameChar] <- value                             # Latest row only
-					# print("What does the new dataframe look like? ...... THREE")
-					# print(prevData)
-
-					# The time cell gets set to zero, so put the time value back into that cell:
-					value = tMillisCurrent 
-					prevData["1", "BLANK"] <- value                             # Latest row only, time column = BLANK
-					# print("What does the new dataframe look like? ...... FOUR")
-					# print(prevData)
-
-			##########################################################################################################################
-				# 4.This is for the case where there is no species name AND we're within the time limit:
-				} else if (( timeInterval < time_limit) & !(currBatNameChar %in% colnames(prevData))) {
-
-					# print("The bat name was not there!")
-					# Now to create our new data column:
-					df9 <- data.frame(placeholder_name = 1)
-					names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
-
-					# Now insert a new value for num_audio_events into row 1:
-					df9["1", currBatNameChar] <- num_audio_events
-					print("Now we have our new dataframe with some useful data:")
-					df9
-					# print(df9)
-					# Now add the new column:
-					prevData <- cbind(prevData, df9) 
-
-					# Set all the values of bat frequency, num_audio_events, of the new species column, into the new dataframe as zero:
-					value = 0                                                         # (num_audio_events = 0)
-					prevData[, currBatNameChar] <- value                                # All rows in species column
-					# print("What does the new dataframe look like? .... FIVE ")
-					# print(prevData)
-
-					# Then set the first row to correct num_audio_events value:
-					value = num_audio_events
-					prevData["1", currBatNameChar] <- value                             # Latest row only
-					# print("What does the new dataframe look like? ...... SIX")
-					# print(prevData)
-
+					value <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/barchart_time.txt")
+					time_limit <- value[c(1),c(1)]
+					# print("Imported time_limit:")
+					cat(magenta$bold('From the R file: Imported time_limit:\n'))
+					print(time_limit)
 				}
 
-			# 5.This is the case where there is no csv file:
-			} else {
-					print("No csv file exists ..... ")
-					df14 <- t                                                             # Add time stamp
-					df15 <- data.frame(df14)
-					colnames(df15) <- c("BLANK")
-					prevData <- df15
-					
-					# print("The bat name was not there!")
-					# Now to create our new data column:
-					df9 <- data.frame(placeholder_name = 1)
-					names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
+				##################################################################################################################################
 
-					# Now insert a new value for num_audio_events into row 1:
-					df9["1", currBatNameChar] <- num_audio_events
-					# print("Now we have our new dataframe with some useful data:")
-					# print(df9)
-					
-					# Now add the new column:
-					prevData <- cbind(prevData, df9) 
-
-					# Set all the values of bat frequency, num_audio_events, of the new species column, into the new dataframe as zero:
-					value = 0                                                         # (num_audio_events = 0)
-					prevData[, currBatNameChar] <- value                                # All rows in species column
-					# print("What does the new dataframe look like? .... FIVE ")
-					# print(prevData)
-
-					# Then set the first row to correct num_audio_events value:
-					value = num_audio_events
-					prevData["1", currBatNameChar] <- value                             # Latest row only
-					# print("What does the new dataframe look like? ...... SIX")
-					# print(prevData)
-					
-					# print("This should be the new csv file to save?")
-					# print(df15)
-					write.table(df15, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
-			} # (if(file.exists("From_R_01.csv")))
-
-			# print("Now we have our new prevData dataframe with some useful data:")
-			cat(magenta$bold('Now we have our new prevData dataframe with some useful data:\n'))
-			print(prevData)
-
-			# print("END")
-
-			write.table(Final_result, file = "Final_result.txt", sep = "\t", row.names = TRUE, col.names = NA)
-			# write.table(df11, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
-			write.table(prevData, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
-			# write.table("", file = "/home/tegwyn/ultrasonic_classifier/helpers/classification_finished.txt")
-			
-			# Since we have a positive classification result, we can now run the renamimg script, script_3.sh:
-			path = "/home/tegwyn/ultrasonic_classifier/script_3.sh"
-			cat(magenta$bold('Now try to run script_3.sh:\n'))
-			system(path)
-			cat(magenta$bold('Did script_3.sh work?:\n'))
-			
-            # Now run create_spectogram.py or create_graph.py:
-            # TODO: Can we remove all references to Final_result.txt in script_3.sh ???
-            
-            # TODO: we can move this next if section to the set up section later on:
-            if(file.exists("/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt"))
-			{
-				value <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt")
-				text_or_graph_or_spectogram <- value[c(1),c(1)]
-				value2 <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt")
-				high_or_low_res_spectogram <- value2[c(1),c(1)]
-				# print("Imported time_limit:")
-				cat(magenta$bold('From the R file: text_or_graph_or_spectogram:\n'))
-				print(text_or_graph_or_spectogram)
-				cat(magenta$bold('From the R file: high_or_low_res_spectogram:\n'))
-				print(high_or_low_res_spectogram)
-				
-				if (text_or_graph_or_spectogram == "spectogram")
+				if((file.exists("From_R_01.csv")) )
 				{
-					if (high_or_low_res_spectogram == "LOW")
+					prevData <- read.csv("From_R_01.csv")
+					# Read the previous time cell:
+					newValue <- prevData[c(1),c(1)]
+					tMillisPrevious = newValue
+					
+					# Calculate time interval:
+					timeInterval = tMillisCurrent - tMillisPrevious
+					# print("Time interval: ")
+					cat(magenta$bold('From the R file: Time interval:\n'))
+					print(timeInterval)
+
+				###########################################################################################################################
+					# 1.This is for the case where there is a species name AND we're within the time limit:
+					if((currBatNameChar %in% colnames(prevData)) & (timeInterval < time_limit) )
 					{
-						cat(magenta$bold('From the R file: LOW resolution was selected !!!:\n'))
-						system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
-					
-					} else {
-						system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
-						cat(magenta$bold('From the R file: HIGH resolution was selected !!!:\n'))
+						# print("Yep, it's in there!")
+						# Lets add the new data bat frequency integer ,num_audio_events, to the old:
+						prevValue <- prevData["1", currBatNameChar]
+						newValue = prevValue + num_audio_events
+						
+						# print("This is the number of rows in the dataframe:")
+						# print(nrow(prevData))
+
+						prevData["1", currBatNameChar] <- newValue                                  # This is where a new value is inserted into a cell.
+
+				##########################################################################################################################
+					# 2.This is for the case where there is no species name AND we've passed the time limit:
+					} else if (( timeInterval > time_limit) & !(currBatNameChar %in% colnames(prevData))) {
+
+						# print("The bat name was not there!")
+						
+						# Firstly, duplicate row 1, which is the latest row, dataFrame[1,]:
+						prevData <- rbind(prevData[1,], prevData)
+						# print("Did this dupicate the rows ... YES !!!!")
+						# print(prevData)
+
+						# Now set all the values of row 1 to zero:
+						value = 0                                                         # (num_audio_events = 0)
+						prevData["1",] <- value                                # All rows in species column
+						# print("What does the new dataframe look like? .... TWO ")
+						# print(prevData)
+
+						# Now to create our new data column:
+						df9 <- data.frame(placeholder_name = 1)
+						names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
+						# print("This below should now have column names:")
+						# df9
+
+						# Now try and replace the placeholder with num_audio_events:
+						# But, initially, set all the new num_audio_events cells to something temporary:
+						# ferrets = 99
+						# df9["1", currBatNameChar] <- ferrets
+						# print("What does the ferrets dataframe look like?")
+						# print(df9)
+
+						# Now insert a new value for num_audio_events into row 1, the new column:
+						df9["1", currBatNameChar] <- num_audio_events
+						# print("Now we have our new dataframe with some useful data:")
+						# df9
+						# print(df9)
+						
+						# Now add the new column:
+						prevData <- cbind(prevData, df9) 
+						
+						# Now set all the values of column bat name to zero:
+						value = "0"                                                         # (num_audio_events = 0)
+						prevData[,currBatNameChar] <- value                                # All rows in species column
+						# print("What does the new dataframe look like? .... TWO ")
+						# print(prevData)
+						
+						# Then set the first row to correct num_audio_events value:
+						value = num_audio_events
+						prevData["1", currBatNameChar] <- value                             # Latest row only
+						# print("What does the new dataframe look like? ...... THREE")
+						# print(prevData)
+
+						# The time cell gets set to zero, so put the time value back into that cell:
+						value = tMillisCurrent 
+						prevData["1", "BLANK"] <- value                             # Latest row only, time column = BLANK
+						# print("What does the new dataframe look like? ...... FOUR")
+						# print(prevData)
+						
+				##############################################################################################################
+					# 3.This is for the case where there is a species name AND we're outside the time limit:
+					} else if ((currBatNameChar %in% colnames(prevData)) & ( timeInterval > time_limit))  {
+
+						# Firstly, duplicate row 1, which is the latest row, dataFrame[1,]:
+						prevData <- rbind(prevData[1,], prevData)
+						# print("Did this dupicate the rows ... YES !!!!")
+						# print(prevData)
+
+						# Now insert the new value of time into the new dataframe row:
+						value = t
+						prevData["1", "BLANK"] <- value
+
+						
+						# Now set all the values of row 1 to zero:
+						value = 0                                                         # (num_audio_events = 0)
+						prevData["1",] <- value                                # All rows in species column
+						# print("What does the new dataframe look like? .... TWO ")
+						# print(prevData)
+						
+						
+						# Then set the first row to correct num_audio_events value:
+						value = num_audio_events
+						prevData["1", currBatNameChar] <- value                             # Latest row only
+						# print("What does the new dataframe look like? ...... THREE")
+						# print(prevData)
+
+						# The time cell gets set to zero, so put the time value back into that cell:
+						value = tMillisCurrent 
+						prevData["1", "BLANK"] <- value                             # Latest row only, time column = BLANK
+						# print("What does the new dataframe look like? ...... FOUR")
+						# print(prevData)
+
+				##########################################################################################################################
+					# 4.This is for the case where there is no species name AND we're within the time limit:
+					} else if (( timeInterval < time_limit) & !(currBatNameChar %in% colnames(prevData))) {
+
+						# print("The bat name was not there!")
+						# Now to create our new data column:
+						df9 <- data.frame(placeholder_name = 1)
+						names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
+
+						# Now insert a new value for num_audio_events into row 1:
+						df9["1", currBatNameChar] <- num_audio_events
+						print("Now we have our new dataframe with some useful data:")
+						df9
+						# print(df9)
+						# Now add the new column:
+						prevData <- cbind(prevData, df9) 
+
+						# Set all the values of bat frequency, num_audio_events, of the new species column, into the new dataframe as zero:
+						value = 0                                                         # (num_audio_events = 0)
+						prevData[, currBatNameChar] <- value                                # All rows in species column
+						# print("What does the new dataframe look like? .... FIVE ")
+						# print(prevData)
+
+						# Then set the first row to correct num_audio_events value:
+						value = num_audio_events
+						prevData["1", currBatNameChar] <- value                             # Latest row only
+						# print("What does the new dataframe look like? ...... SIX")
+						# print(prevData)
+
 					}
-				} else if (text_or_graph_or_spectogram == "graph") {
-					system('python3 /home/tegwyn/ultrasonic_classifier/create_barchart.py')
+
+				# 5.This is the case where there is no csv file:
+				} else {
+						print("No csv file exists ..... ")
+						df14 <- t                                                             # Add time stamp
+						df15 <- data.frame(df14)
+						colnames(df15) <- c("BLANK")
+						prevData <- df15
+						
+						# print("The bat name was not there!")
+						# Now to create our new data column:
+						df9 <- data.frame(placeholder_name = 1)
+						names(df9)[names(df9) == "placeholder_name"] <- currBatNameChar
+
+						# Now insert a new value for num_audio_events into row 1:
+						df9["1", currBatNameChar] <- num_audio_events
+						# print("Now we have our new dataframe with some useful data:")
+						# print(df9)
+						
+						# Now add the new column:
+						prevData <- cbind(prevData, df9) 
+
+						# Set all the values of bat frequency, num_audio_events, of the new species column, into the new dataframe as zero:
+						value = 0                                                         # (num_audio_events = 0)
+						prevData[, currBatNameChar] <- value                                # All rows in species column
+						# print("What does the new dataframe look like? .... FIVE ")
+						# print(prevData)
+
+						# Then set the first row to correct num_audio_events value:
+						value = num_audio_events
+						prevData["1", currBatNameChar] <- value                             # Latest row only
+						# print("What does the new dataframe look like? ...... SIX")
+						# print(prevData)
+						
+						# print("This should be the new csv file to save?")
+						# print(df15)
+						write.table(df15, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
+				} # (if(file.exists("From_R_01.csv")))
+
+				# print("Now we have our new prevData dataframe with some useful data:")
+				cat(magenta$bold('Now we have our new prevData dataframe with some useful data:\n'))
+				print(prevData)
+
+				# print("END")
+
+				write.table(Final_result, file = "Final_result.txt", sep = "\t", row.names = TRUE, col.names = NA)
+				# write.table(df11, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
+				write.table(prevData, file = "From_R_01.csv", sep = ",", row.names = FALSE, col.names = TRUE)
+				# write.table("", file = "/home/tegwyn/ultrasonic_classifier/helpers/classification_finished.txt")
+				
+				# Since we have a positive classification result, we can now run the renamimg script, script_3.sh:
+				path = "/home/tegwyn/ultrasonic_classifier/script_3.sh"
+				cat(magenta$bold('Now try to run script_3.sh:\n'))
+				system(path)
+				cat(magenta$bold('Did script_3.sh work?:\n'))
+				
+				# Now run create_spectogram.py or create_graph.py:
+				# TODO: Can we remove all references to Final_result.txt in script_3.sh ???
+				
+				# TODO: we can move this next if section to the set up section later on:
+				if(file.exists("/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt"))
+				{
+					value <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/toggled_02.txt")
+					text_or_graph_or_spectogram <- value[c(1),c(1)]
+					value2 <- read.table("/home/tegwyn/ultrasonic_classifier/helpers/specto_resolution.txt")
+					high_or_low_res_spectogram <- value2[c(1),c(1)]
+					# print("Imported time_limit:")
+					cat(magenta$bold('From the R file: text_or_graph_or_spectogram:\n'))
+					print(text_or_graph_or_spectogram)
+					cat(magenta$bold('From the R file: high_or_low_res_spectogram:\n'))
+					print(high_or_low_res_spectogram)
+					
+					if (text_or_graph_or_spectogram == "spectogram")
+					{
+						if (high_or_low_res_spectogram == "LOW")
+						{
+							cat(magenta$bold('From the R file: LOW resolution was selected !!!:\n'))
+							system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram.py')
+						
+						} else {
+							system('python3 /home/tegwyn/ultrasonic_classifier/create_spectogram_batch_process.py')
+							cat(magenta$bold('From the R file: HIGH resolution was selected !!!:\n'))
+						}
+					} else if (text_or_graph_or_spectogram == "graph") {
+						system('python3 /home/tegwyn/ultrasonic_classifier/create_barchart.py')
+					}
 				}
-			}
-			
+			}                                       # if confidence > 10
 		} else {                                    # if (num_audio_events >1)
 		# print("Although a filtered.wav file was found, it did not have any audio events in it !!!!")
 		# cat(magenta$bold('From the R file: Although a filtered.wav file was found, it did not have any audio events in it !!!!\n'))
 		write.table("", file = "/home/tegwyn/ultrasonic_classifier/helpers/classification_finished.txt")
-		fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")
+		fileConn<-file("/home/tegwyn/ultrasonic_classifier/helpers/status_update.txt")                     # GUI displays live status update.
 		writeLines(c("No audio events detected !!"), fileConn)
 		close(fileConn)
 		Sys.sleep(0.5)
