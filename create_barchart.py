@@ -15,6 +15,7 @@ import os
 import colorama
 from colorama import Fore, Back, Style
 import sys
+import datetime
 
 end = "\n"
 RED = "\x1b[1;31m"
@@ -50,15 +51,17 @@ path_to_battery = "/home/tegwyn/ultrasonic_classifier/battery_info.sh"
 n = 1
 line = [1, 2, 3, 4, 5]
 
-f = open(file5)             # toggled_02.txt
+f = open(file5)                 # toggled_02.txt
 text_or_graph_or_spectogram = f.readline()
 
 sys.stderr.write('\x1b[1;31m' + "Start of create_barchart.py !!!!" + '\x1b[0m' + end)
+sys.stderr.write(str(datetime.datetime.now())+ '\n')
 
 print(Fore.CYAN)
 print("From create_barchart.py: Is it text or graph or spectogram?")
 print(text_or_graph_or_spectogram )
 f.close()
+
 
 f = open(file4)             # combo_01.txt
 while True:
@@ -226,8 +229,8 @@ data = data.transpose()
 # print(Style.RESET_ALL)
 
 
-
-if (row_count >14):
+# b = np.zeros((16, (10)))                                            # This is set to 10 so that we dont get nasty looking big blobby bars at the start.
+if (row_count >8):
     b = np.zeros((16, (row_count -1)))                                # row, columns .... Increase columns rather than rows since the data has been transposed.
 else:
     b = np.zeros((16, (10)))
