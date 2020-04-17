@@ -1,4 +1,4 @@
-# $ cd /home/paddy/Desktop/deploy_classifier/
+# $ cd /media/tegwyn/Xavier_SD/ultrasonic_classifier/
 # $ Rscript Train_bats.R
 
 # $ Rscript install.packages("audio")
@@ -14,7 +14,7 @@ library(rstudioapi)
 
 # Set up our working directory and data directory:'
 
-setwd("/home/paddy/Desktop/deploy_classifier/")
+setwd("/media/tegwyn/Xavier_SD/ultrasonic_classifier/")
 wd <- getwd()         # Working directory
 wd
 data_dir <- file.path(wd, "data")
@@ -99,12 +99,6 @@ TDs <- TDs[lapply(TDs, function(x) length(x$data)) > 0]
 ###################################################################################################
 bat_train <- function(bat_name)
 {
-  setwd("/home/paddy/Desktop/deploy_classifier/")
-  wd <- getwd()         # Working directory
-  wd
-  data_dir <- file.path(wd, "data")
-  data_dir
-
   BAT_wav <- read_audio(file.path(wd, "data/c_pip/c_pip_247.wav"))
   BAT_wav
   files <- dir(data_dir, recursive = TRUE, full.names = TRUE, pattern = "[.]wav$")
@@ -152,6 +146,12 @@ bat_train <- function(bat_name)
 
 ###################################################################################################
 print("Training has now commenced ...... it may take a few minutes ..... please wait !!!!")
+
+bat_name <- "serotine"
+rf_serotine <- bat_train(bat_name)
+print("serotine:")
+rf_serotine $confusion
+saveRDS(rf_serotine,"rf_serotine.rds")
 
 bat_name <- "bird"
 rf_bird <- bat_train(bat_name)
@@ -224,6 +224,12 @@ rf_plecotus <- bat_train(bat_name)
 print("plecotus:")
 rf_plecotus $confusion
 saveRDS(rf_plecotus,"rf_plecotus.rds")
+
+bat_name <- "rodent"
+rf_rodent <- bat_train(bat_name)
+print("rodent:")
+rf_plecotus $confusion
+saveRDS(rf_plecotus,"rf_rodent.rds")
 
 ############################################
 # Predict on one unknown wav file:
