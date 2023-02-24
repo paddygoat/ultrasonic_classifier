@@ -449,7 +449,7 @@ class ButtonWindow(Gtk.Window):
                 self.specto_cbtn.set_active(False)
             self.specto_cbtn.set_valign(Gtk.Align.START)
             self.specto_cbtn.connect("clicked", self.on_fullscreen_clicked)
-            settings_box_7.pack_start(self.specto_cbtn, True, True, 0)
+            settings_box_7.pack_start(self.specto_cbtn, False, False, 0)
             
 #######################################################################################################################
 #######################################################################################################################
@@ -512,7 +512,7 @@ class ButtonWindow(Gtk.Window):
 
         buttonW3 = Gtk.Button.new_with_mnemonic("_Graphical reporting")
         buttonW3.connect("clicked", self.graph_clicked)
-        hbox2.pack_start(buttonW3, False, False, 0)
+        hbox2.pack_start(buttonW3, True, True, 0)
 
         # hbox2.set_position(300)
 
