@@ -7,7 +7,7 @@
 <br>At command prompt, type:
 <br>sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'rock').
 
-**To install ubuntu desktop type:**
+`#0969DA`**To install ubuntu desktop type:**
 <br>sudo apt install ubuntu-desktop
 <br>If errors, repeat above command.
 <br>Reboot the Rock 5B.
