@@ -27,8 +27,8 @@ Due to the current unavailability of both the Jetson Nano and Raspberry Pi 4, th
 <br>``cd bzip2-1.0.6`` 
 <br>``sudo make install`` 
 
-<br>sudo apt install -y git
-<br>git clone https://github.com/paddygoat/ultrasonic_classifier.git
+<br>``sudo apt install -y git``
+<br>``git clone https://github.com/paddygoat/ultrasonic_classifier.git``
 
 <ins>**Now download the random forest model files:**</ins>
 <br>``sudo apt install -y curl``
