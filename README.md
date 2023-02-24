@@ -6,26 +6,26 @@ Due to the current unavailability of both the Jetson Nano and Raspberry Pi 4, th
 <br>Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.
 <br>Look for the flashing blue LED - might be necessary to reboot a few times. This seems to be some kind of minor bug in the Rock 5B. Initially, it also seems to be fussy about what type of HDMI screen is used.
 <br>At command prompt, type:
-`` sudo apt update && sudo apt upgrade``  (the user is 'rock' and the password is 'rock').
+``sudo apt update && sudo apt upgrade``  (the user is 'rock' and the password is 'rock').
 
 <ins>**To install ubuntu desktop type:**</ins>
-<br>sudo apt install ubuntu-desktop
+<br>`` sudo apt install ubuntu-desktop`` 
 <br>If errors, repeat above command.
 <br>Reboot the Rock 5B.
 <br>In settings, add a new user called 'tegwyn' and use password 'rock2023'.
 <br>Switch users to tegwyn.
 
-<br>sudo apt install make
-<br>sudo apt install build-essential
+<br>`` sudo apt install make`` 
+<br>`` sudo apt install build-essential`` 
 <br>If errors, repeat above command.
 
 <br>Manually download bzip2-1.0.6 from soundforge website:
 <br>https://sourceforge.net/projects/bzip2/files/latest/download
 <br>It should now be in the downloads folder.
-<br>cd && cd /home/tegwyn/Downloads/
-<br>tar zxvf bzip2-1.0.6.tar.gz 
-<br>cd bzip2-1.0.6
-<br>sudo make install
+<br>`` cd && cd /home/tegwyn/Downloads/`` 
+<br>`` tar zxvf bzip2-1.0.6.tar.gz``  
+<br>`` cd bzip2-1.0.6`` 
+<br>`` sudo make install`` 
 
 <br>sudo apt install -y git
 <br>git clone https://github.com/paddygoat/ultrasonic_classifier.git
