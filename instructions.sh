@@ -33,7 +33,7 @@ unzip /home/tegwyn/ultrasonic_classifier/rds_files/rds_files.zip -d /home/tegwyn
 rm /home/tegwyn/ultrasonic_classifier/rds_files/rds_files.zip
 rm /home/tegwyn/ultrasonic_classifier/rds_files/nothing.txt
 
-Install software tools and libraries:
+# Install software tools and libraries:
 sudo apt install -y python3-pip
 sudo apt install -y python3-smbus
 sudo apt install -y i2c-tools
@@ -94,47 +94,6 @@ install.packages("bioacoustics")
 cd /home/tegwyn/ultrasonic_classifier/ && ./run.sh
 
 # Rattle some keys near the microphone and a 'UFO' should be detected.
-
-
-
-ImportError: No module named gi
-
-
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 111, in __get_smbus
-    return SMBus(i2c__bus)
-PermissionError: [Errno 13] Permission denied
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "batteryAndTempMonitoring.py", line 184, in <module>
-    main()
-  File "batteryAndTempMonitoring.py", line 60, in main
-    adc = ADCPi(0x68, 0x69, 12)
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 198, in __init__
-    self.__bus = self.__get_smbus(bus)
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 115, in __get_smbus
-    raise("OS error: {0}".format(err))
-TypeError: exceptions must derive from BaseException
-... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ... Traceback (most recent call last):
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 111, in __get_smbus
-    return SMBus(i2c__bus)
-PermissionError: [Errno 13] Permission denied
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
-  File "batteryAndTempMonitoring.py", line 184, in <module>
-    main()
-  File "batteryAndTempMonitoring.py", line 60, in main
-    adc = ADCPi(0x68, 0x69, 12)
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 198, in __init__
-    self.__bus = self.__get_smbus(bus)
-  File "/usr/local/lib/python3.8/dist-packages/ADCPi/ADCPi.py", line 115, in __get_smbus
-    raise("OS error: {0}".format(err))
-TypeError: exceptions must derive from BaseException
-... ... ... ... ... ... ... ... ... ... 
 
 
 
