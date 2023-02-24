@@ -76,7 +76,7 @@
 <br>sudo apt-get install -y r-base-dev
 <br>If errors, repeat above command.
 
-<ins> Change some file permissions:
+<ins>**Change some file permissions:**</ins>
 <br>sudo chmod -R 777 /usr/local/lib/R/site-library
 <br>sudo chmod -R 777 /usr/local/lib/R/
 <br>sudo chmod -R 775 /home/tegwyn/ultrasonic_classifier/
