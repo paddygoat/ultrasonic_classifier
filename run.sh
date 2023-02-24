@@ -25,7 +25,7 @@ if [ "$kernel" = "$nano" ]; then
     echo whales | sudo -S jetson_clocks
 fi
 
-echo whales | sudo -S jetson_clocks
+# echo whales | sudo -S jetson_clocks
 # xrandr -o inverted                                                                    # Rotate screen 180 degrees.
 
 
@@ -142,7 +142,7 @@ do
     # echo "close_app.txt file does not exist"
     # echo "base name = " $(basename $0)
   fi
-  python3 batteryAndTempMonitoring.py
+  # python3 batteryAndTempMonitoring.py
 
   if [ -e "$1/home/tegwyn/ultrasonic_classifier/helpers/restart.txt" ]; then     # Waiting for a 'restart.txt' file to appear in 'helpers' folder.
   echo "Run.sh reports: restart.txt file exists"
@@ -167,7 +167,7 @@ do
   aplay --device=hw:0,3 /home/tegwyn/ultrasonic_classifier/alert_sounds/main_Computers_are_in_Control.wav
 
     while [ "$count" -gt 1 ]; do
-      python3 batteryAndTempMonitoring.py
+      # python3 batteryAndTempMonitoring.py
       printf  "${RED}The battery is in trouble .. ${shutDownDelay} ${NC}\n"
       counter=$((count-1))
       count=$counter
@@ -184,7 +184,7 @@ do
 
     printf  "${BLUE}Now shutdown .. ${count} ${NC}\n"
     # echo whales | sudo halt                              # This does not turn off fan and green LED.
-    echo whales | sudo -S shutdown
+    echo rock2023 | sudo -S shutdown
     sleep 1000                                             # Wait for shutdown to complete.
   fi
   sleep 10
