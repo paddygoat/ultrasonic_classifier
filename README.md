@@ -1,9 +1,10 @@
 # Ultrasonic Classifier for Rock 5B
+Due to the current unavailability of both the Jetson Nano and Raspberry Pi 4, the Rock 5B is now the preferred platform for the classifier. It runs on Ubuntu server v.20.04 operating system and a desktop GUI can easily be installed if required. The OS image should be downloaded from the official Rock 5B page and then flashed to an SD card or some other storage medium. These instructions were tested on 24th February 2023 on a 128 Gb Sandisc card.
 
 <ins>**The SD card:**</ins>
 <br>Use Balena Etcher to install a Rock 5B image on the SD card.
 <br>Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.
-<br>Look for the flashing blue LED, might be necessary to reboot a few times.
+<br>Look for the flashing blue LED - might be necessary to reboot a few times. This seems to be some kind of minor bug in the Rock 5B. Initially, it also seems to be fussy about what type of HDMI screen is used.
 <br>At command prompt, type:
 <br>sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'rock').
 
