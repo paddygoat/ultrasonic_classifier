@@ -1,5 +1,6 @@
 # Ultrasonic Classifier for Rock 5B
 
+<ins> text </ins>
 **The SD card:**
 <br>Use Balena Etcher to install a Rock 5B image on the SD card.
 <br>Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.
