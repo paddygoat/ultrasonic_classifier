@@ -1,16 +1,16 @@
 # Ultrasonic Classifier for Rock 5B
 
-- [ ] Use Balena Etcher to install a Rock 5B image on the SD card.
-- [ ] Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.
-- [ ] Look for the flashing blue LED, might be necessary to reboot a few times.
-At command prompt, type:
-sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'rock').
-To install ubuntu desktop type:
-sudo apt install ubuntu-desktop
-If errors, repeat above command.
-Reboot the Rock 5B.
-In settings, add a new user called 'tegwyn' and use password 'rock2023'.
-Switch users to tegwyn.
+Use Balena Etcher to install a Rock 5B image on the SD card.<\br>
+Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.<\br>
+Look for the flashing blue LED, might be necessary to reboot a few times.<\br>
+At command prompt, type:<\br>
+sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'rock').<\br>
+To install ubuntu desktop type:<\br>
+sudo apt install ubuntu-desktop<\br>
+If errors, repeat above command.<\br>
+Reboot the Rock 5B.<\br>
+In settings, add a new user called 'tegwyn' and use password 'rock2023'.<\br>
+Switch users to tegwyn.<\br>
 
 sudo apt install make
 sudo apt install build-essential
