@@ -6,7 +6,7 @@ Due to the current unavailability of both the Jetson Nano and Raspberry Pi 4, th
 <br>Install the new card in the Rock 5B, connect ethernet cable and mouse, keyboard and monitor and power it up.
 <br>Look for the flashing blue LED - might be necessary to reboot a few times. This seems to be some kind of minor bug in the Rock 5B. Initially, it also seems to be fussy about what type of HDMI screen is used.
 <br>At command prompt, type:
-<br>sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'rock').
+`` sudo apt update && sudo apt upgrade``  (the user is 'rock' and the password is 'rock').
 
 <ins>**To install ubuntu desktop type:**</ins>
 <br>sudo apt install ubuntu-desktop
