@@ -7,7 +7,7 @@ sudo apt update && sudo apt upgrade (the user is 'rock' and the password is 'roc
 sudo apt install ubuntu-desktop
 # If errors, repeat above command.
 # Reboot the Rock 5B.
-# In settings, add a new user called 'tegwyn' and use password 'rock2023'.
+# In settings, add a new user called 'tegwyn'.
 # Switch users to tegwyn.
 
 sudo apt install make
