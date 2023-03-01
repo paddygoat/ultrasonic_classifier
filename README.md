@@ -12,7 +12,7 @@ Due to the current unavailability of both the Jetson Nano and Raspberry Pi 4, th
 <br>``sudo apt install ubuntu-desktop`` 
 <br>If errors, repeat above command.
 <br>Reboot the Rock 5B.
-<br>In settings, add a new user called 'tegwyn' and use password 'rock2023'.
+<br>In settings, add a new user called 'tegwyn'.
 <br>Switch users to tegwyn.
 
 <br>``sudo apt install make`` 
